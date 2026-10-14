@@ -72,8 +72,7 @@ export default function Hero({ onNavigate }) {
         <div className="hero-typography-block">
           {/* Eyebrow */}
           <div className="hero-chapter-eyebrow">
-            <span className="eyebrow-dash">—</span>
-            <span className="eyebrow-text">TECHNOLOGY · COMMUNITY · IMPACT</span>
+            <span className="eyebrow-text">Technology · Community · Impact</span>
           </div>
 
           {/* Headline */}

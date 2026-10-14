@@ -2,6 +2,28 @@
 // src/data/team.js — ACM VIT-AP Student Chapter Team Data
 // ---------------------------------------------------------------------------
 
+// ─── 0] FACULTY COORDINATOR ──────────────────────────────────────────────
+export const FACULTY_COORDINATOR = {
+  id: 'faculty-coordinator',
+  name: 'Dr. Nagaraju Devarakonda',
+  role: 'Faculty Coordinator',
+  designation: 'Professor Grade 2',
+  institution: 'VIT-AP University',
+  photo: '/team-photos/Nagaraju Devarakonda .png',
+  eyebrow: 'FACULTY & MENTORSHIP',
+  headline: 'GUIDED BY KNOWLEDGE. DRIVEN BY CURIOSITY.',
+  subtext: 'Academic guidance that empowers students to explore computing, research, innovation, and leadership.',
+  bio: 'Guiding the ACM VIT-AP chapter towards academic excellence, innovative thinking, and impactful student development in computing and technology.',
+  quote: 'Empowering students to turn ideas into impact.',
+  messageTitle: 'Message from the Faculty Coordinator',
+  messageBody: 'The ACM Student Chapter at VIT-AP provides a platform for students to learn, collaborate, innovate, and grow beyond the classroom. Through technical events, hands-on projects, and community initiatives, we aim to nurture curiosity, encourage meaningful exploration, and build a strong foundation for future leaders in computing.',
+  socials: {
+    email: 'mailto:nagaraju.d@vitap.ac.in',
+    linkedin: 'https://www.linkedin.com/in/dr-nagaraju-devarakonda-0b731936/',
+    website: 'https://vitap.ac.in',
+  },
+};
+
 // ─── 1] ADMIN TEAM ─────────────────────────────────────────────────────────
 // Tier 1: Top 2 in a row — President & Vice President
 export const ADMIN_PRESIDENCY = [

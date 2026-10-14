@@ -17,8 +17,7 @@ export default function Events() {
       {/* Section Header */}
       <div className="section-header-cluster">
         <div className="section-eyebrow-badge">
-          <span className="eyebrow-accent-dot" />
-          <span>EVENTS</span>
+          <span>Events & Initiatives</span>
         </div>
         <h2 className="section-headline-large">
           EVENTS THAT CREATE <span className="blue-highlight">CHANGE.</span>

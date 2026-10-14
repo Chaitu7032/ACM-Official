@@ -45,8 +45,7 @@ function AboutSection() {
     <section className="section-full" id="about">
       <div className="section-header-cluster">
         <div className="section-eyebrow-badge">
-          <span className="eyebrow-accent-dot" />
-          <span>01 / THE NETWORK</span>
+          <span>The Network</span>
         </div>
         <h2 className="section-headline-large">
           A COMMUNITY THAT BUILDS <span className="blue-highlight">BEYOND CLASSROOMS.</span>
@@ -106,8 +105,7 @@ function GallerySection() {
     <section className="section-full" id="gallery">
       <div className="section-header-cluster">
         <div className="section-eyebrow-badge">
-          <span className="eyebrow-accent-dot" />
-          <span>04 / GALLERY</span>
+          <span>Gallery Showcase</span>
         </div>
         <h2 className="section-headline-large">
           MOMENTS THAT <span className="blue-highlight">INSPIRE.</span>
@@ -141,8 +139,7 @@ function ClosingSection() {
       <div className="closing-card">
         <div className="closing-content">
           <div className="section-eyebrow-badge">
-            <span className="eyebrow-accent-dot" />
-            <span>YOUR TURN</span>
+            <span>Join Our Chapter</span>
           </div>
           <h2 className="section-headline-large" style={{ fontSize: 'clamp(2.4rem, 4vw, 3.8rem)' }}>
             YOUR NEXT CHAPTER<br />

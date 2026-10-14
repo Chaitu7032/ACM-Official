@@ -20,8 +20,12 @@ import {
   ChevronRight,
   ArrowLeft,
   ExternalLink,
+  GraduationCap,
+  Mail,
+  Globe,
+  Quote,
 } from 'lucide-react';
-import { ADMIN_PRESIDENCY, ADMIN_CORE_OFFICERS, ADMIN_MANAGERS, DOMAIN_TEAMS } from '../data/team.js';
+import { FACULTY_COORDINATOR, ADMIN_PRESIDENCY, ADMIN_CORE_OFFICERS, ADMIN_MANAGERS, DOMAIN_TEAMS } from '../data/team.js';
 
 // Lucide icon dictionary mapping for Department Cards
 const DEPARTMENT_ICONS = {
@@ -224,7 +228,7 @@ function DepartmentCard({ dept, onSelect, index = 0 }) {
         <div className="dept-icon-box">
           <IconComponent size={20} className="dept-icon-symbol" />
         </div>
-        <span className="dept-number-tag">DEPT {dept.departmentNumber}</span>
+        <span className="dept-number-tag">Dept {dept.departmentNumber}</span>
       </div>
 
       <div className="dept-card-body">
@@ -293,8 +297,7 @@ export default function Team() {
       {/* Section Header */}
       <div className="section-header-cluster text-center">
         <div className="section-eyebrow-badge">
-          <span className="eyebrow-accent-dot" />
-          <span>CHAPTER LEADERSHIP</span>
+          <span>Chapter Leadership</span>
         </div>
         <h2 className="section-headline-large">
           PEOPLE BEHIND THE <span className="blue-highlight">IMPACT.</span>
@@ -304,37 +307,151 @@ export default function Team() {
         </p>
       </div>
 
-      {/* Master Sub-Tabs (1. ADMIN TEAM | 2. DOMAINS & DEPARTMENTS) */}
-      <div className="team-filter-tabs-strip">
+      {/* Segmented Controller (Faculty Coordinator | Admin Team | Domains & Departments) */}
+      <div className="team-filter-tabs-strip" role="tablist" aria-label="Team View Selector">
         <button
           type="button"
+          role="tab"
+          aria-selected={activeTab === 'faculty'}
+          className={`team-subtab-pill ${activeTab === 'faculty' ? 'active' : ''}`}
+          onClick={() => {
+            setActiveTab('faculty');
+            setActiveDepartmentId(null);
+          }}
+        >
+          <GraduationCap size={15} className="tab-icon" />
+          <span className="tab-label">Faculty Coordinator</span>
+          <span className="tab-indicator-badge">Mentor</span>
+        </button>
+        <button
+          type="button"
+          role="tab"
+          aria-selected={activeTab === 'admin'}
           className={`team-subtab-pill ${activeTab === 'admin' ? 'active' : ''}`}
           onClick={() => {
             setActiveTab('admin');
             setActiveDepartmentId(null);
           }}
         >
-          <Shield size={14} />
-          <span>1. ADMIN TEAM</span>
+          <Shield size={15} className="tab-icon" />
+          <span className="tab-label">Core Administration</span>
+          <span className="tab-indicator-badge">Tier I</span>
         </button>
         <button
           type="button"
+          role="tab"
+          aria-selected={activeTab === 'domains'}
           className={`team-subtab-pill ${activeTab === 'domains' ? 'active' : ''}`}
           onClick={() => setActiveTab('domains')}
         >
-          <Terminal size={14} />
-          <span>2. DOMAINS & DEPARTMENTS</span>
+          <Terminal size={15} className="tab-icon" />
+          <span className="tab-label">Domains & Departments</span>
+          <span className="tab-indicator-badge">7 Leads</span>
         </button>
       </div>
 
-      {activeTab === 'admin' ? (
+      {activeTab === 'faculty' ? (
+        /* ─── 0] FACULTY COORDINATOR SHOWCASE VIEW ────────────────────── */
+        <div className="faculty-coordinator-showcase">
+          {/* Top Faculty Showcase Grid */}
+          <div className="faculty-hero-grid">
+            {/* Left Headline Column */}
+            <div className="faculty-lead-intro">
+              <div className="faculty-eyebrow-tag">
+                <span className="faculty-dash">—</span>
+                <span>{FACULTY_COORDINATOR.eyebrow}</span>
+              </div>
+              <h2 className="faculty-bold-headline">
+                GUIDED BY <span className="blue-highlight">KNOWLEDGE.</span><br />
+                DRIVEN BY <span className="acm-cyan-text">CURIOSITY.</span>
+              </h2>
+              <p className="faculty-subtext">
+                {FACULTY_COORDINATOR.subtext}
+              </p>
+            </div>
+
+            {/* Center Profile Glass Card */}
+            <div className="faculty-profile-card">
+              <div className="faculty-photo-outer-frame">
+                <div className="faculty-photo-glow" />
+                <img
+                  src={FACULTY_COORDINATOR.photo}
+                  alt={FACULTY_COORDINATOR.name}
+                  className="faculty-photo-img"
+                  loading="lazy"
+                />
+              </div>
+
+              <div className="faculty-details-block">
+                <div className="faculty-role-pill">
+                  <span>{FACULTY_COORDINATOR.role}</span>
+                </div>
+                <h3 className="faculty-person-name">{FACULTY_COORDINATOR.name}</h3>
+                <span className="faculty-university-tag">
+                  {FACULTY_COORDINATOR.designation} &middot; {FACULTY_COORDINATOR.institution}
+                </span>
+                <p className="faculty-bio-paragraph">{FACULTY_COORDINATOR.bio}</p>
+
+                <div className="faculty-socials-row">
+                  <a
+                    href={FACULTY_COORDINATOR.socials.email}
+                    className="faculty-social-icon-btn"
+                    aria-label="Send email to Faculty Coordinator"
+                  >
+                    <Mail size={16} />
+                  </a>
+                  <a
+                    href={FACULTY_COORDINATOR.socials.linkedin}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    className="faculty-social-icon-btn"
+                    aria-label="Faculty Coordinator LinkedIn Profile"
+                  >
+                    <LinkedinIcon size={16} />
+                  </a>
+                  <a
+                    href={FACULTY_COORDINATOR.socials.website}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    className="faculty-social-icon-btn"
+                    aria-label="VIT-AP Official Website"
+                  >
+                    <Globe size={16} />
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Message Banner */}
+          <div className="faculty-message-card">
+            <div className="faculty-message-header">
+              <div className="faculty-message-icon-box">
+                <FileText size={18} />
+              </div>
+              <h4 className="faculty-message-title">{FACULTY_COORDINATOR.messageTitle}</h4>
+            </div>
+            <div className="faculty-message-content-split">
+              <p className="faculty-message-paragraph">
+                {FACULTY_COORDINATOR.messageBody}
+              </p>
+              <div className="faculty-quote-callout">
+                <Quote size={28} className="faculty-quote-mark" />
+                <blockquote className="faculty-quote-text">
+                  &ldquo;{FACULTY_COORDINATOR.quote}&rdquo;
+                </blockquote>
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : activeTab === 'admin' ? (
         /* ─── 1] ADMIN TEAM VIEW ─────────────────────────────────────── */
         <div className="admin-team-structured-layout">
           {/* ROW 1: 2 in a row (President & Vice President side-by-side) */}
           <div className="admin-tier-section">
             <div className="tier-header-badge">
-              <Crown size={13} />
-              <span>EXECUTIVE PRESIDENCY</span>
+              <Crown size={14} />
+              <span>Executive Presidency</span>
             </div>
             <div className="team-grid-2col executive-tier">
               {ADMIN_PRESIDENCY.map((member) => (
@@ -348,8 +465,8 @@ export default function Team() {
           {/* ROW 2: 3 in a row (Secretary, Joint Secretary, Treasurer) */}
           <div className="admin-tier-section">
             <div className="tier-header-badge">
-              <Shield size={13} />
-              <span>CORE SECRETARIAT & FINANCE</span>
+              <Shield size={14} />
+              <span>Core Secretariat & Finance</span>
             </div>
             <div className="team-grid-3col">
               {ADMIN_CORE_OFFICERS.map((member) => (
@@ -363,8 +480,8 @@ export default function Team() {
           {/* ROW 3: 2 in a row (Club Manager & Technical Manager) */}
           <div className="admin-tier-section">
             <div className="tier-header-badge">
-              <Users size={13} />
-              <span>MANAGEMENT & TECHNICAL OPERATIONS</span>
+              <Users size={14} />
+              <span>Operations & Management</span>
             </div>
             <div className="team-grid-2col managers-tier">
               {ADMIN_MANAGERS.map((member) => (
@@ -417,7 +534,7 @@ export default function Team() {
               {/* Active Department Header Banner */}
               <div className="domain-header-banner">
                 <div className="domain-banner-tag">
-                  DEPARTMENT {selectedDepartment.departmentNumber}
+                  <span>Department {selectedDepartment.departmentNumber}</span>
                 </div>
                 <h3 className="domain-banner-title">{selectedDepartment.title}</h3>
                 <p className="domain-banner-desc">{selectedDepartment.desc}</p>
@@ -429,8 +546,8 @@ export default function Team() {
                 {totalDeptMembers.length === 2 ? (
                   <div className="admin-tier-section">
                     <div className="tier-header-badge">
-                      <Users size={13} />
-                      <span>DEPARTMENT LEADERSHIP</span>
+                      <Users size={14} />
+                      <span>Department Leadership</span>
                     </div>
                     <div className="team-grid-2col managers-tier">
                       {totalDeptMembers.map((member, i) => (
@@ -451,8 +568,8 @@ export default function Team() {
                     {leads.length > 0 && (
                       <div className="admin-tier-section">
                         <div className="tier-header-badge">
-                          <Sparkles size={13} />
-                          <span>TEAM LEAD</span>
+                          <Sparkles size={14} />
+                          <span>Team Lead</span>
                         </div>
                         <div className="team-grid-1col-center">
                           {leads.map((lead, i) => (
@@ -471,8 +588,8 @@ export default function Team() {
                     {coLeads.length > 0 && (
                       <div className="admin-tier-section">
                         <div className="tier-header-badge">
-                          <Users size={13} />
-                          <span>CO-LEADS</span>
+                          <Users size={14} />
+                          <span>Co-Leads</span>
                         </div>
                         <div className={coLeads.length === 1 ? 'team-grid-1col-center' : 'team-grid-2col managers-tier'}>
                           {coLeads.map((colead, i) => (
@@ -491,8 +608,8 @@ export default function Team() {
                     {managers.length > 0 && (
                       <div className="admin-tier-section">
                         <div className="tier-header-badge">
-                          <Briefcase size={13} />
-                          <span>MANAGEMENT</span>
+                          <Briefcase size={14} />
+                          <span>Management</span>
                         </div>
                         <div className={managers.length === 1 ? 'team-grid-1col-center' : 'team-grid-2col managers-tier'}>
                           {managers.map((manager, i) => (
@@ -511,8 +628,8 @@ export default function Team() {
                     {standardMembers.length > 0 && (
                       <div className="admin-tier-section">
                         <div className="tier-header-badge">
-                          <Users size={13} />
-                          <span>TEAM MEMBERS</span>
+                          <Users size={14} />
+                          <span>Team Members</span>
                         </div>
                         <div className="team-grid-3col">
                           {standardMembers.map((member, i) => (
