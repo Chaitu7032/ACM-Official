@@ -8,11 +8,11 @@ export default function Navbar({ activeSection = 'home', onNavigate }) {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
 
   const navLinks = [
-    { label: 'HOME', id: 'home' },
-    { label: 'ABOUT', id: 'about' },
-    { label: 'EVENTS', id: 'events' },
-    { label: 'TEAMS', id: 'teams' },
-    { label: 'GALLERY', id: 'gallery' },
+    { label: 'Home', id: 'home' },
+    { label: 'About', id: 'about' },
+    { label: 'Events', id: 'events' },
+    { label: 'Teams', id: 'teams' },
+    { label: 'Gallery', id: 'gallery' },
   ];
 
   const handleNavClick = (e, id) => {
@@ -26,67 +26,72 @@ export default function Navbar({ activeSection = 'home', onNavigate }) {
 
   return (
     <header className="floating-nav-wrapper">
-      <nav className="floating-nav-pill" aria-label="Main Navigation">
-        {/* Brand Group */}
+      <div className="nav-divided-bar" aria-label="Main Navigation">
+        {/* 1. Left Island: Brand Capsule */}
         <a
           href="#home"
-          className="nav-brand-group"
+          className="nav-brand-group nav-island-capsule"
           onClick={(e) => handleNavClick(e, 'home')}
         >
-          <img
-            src="/acm-logo.svg"
-            alt="ACM VIT-AP Logo"
-            className="nav-logo-badge-img"
-            width={34}
-            height={34}
-            onError={(e) => {
-              e.currentTarget.style.display = 'none';
-            }}
-          />
+          <div className="nav-logo-diamond-wrap">
+            <img
+              src="/acm-logo.svg"
+              alt="ACM Logo"
+              className="nav-logo-badge-img"
+              width={34}
+              height={34}
+            />
+          </div>
           <div className="nav-brand-text">
             <span className="nav-brand-title">ACM STUDENT CHAPTER</span>
             <span className="nav-brand-sub">VIT-AP UNIVERSITY</span>
           </div>
         </a>
 
-        {/* Desktop Nav Links */}
-        <ul className="nav-links-cluster">
-          {navLinks.map((link) => {
-            const isActive = activeSection === link.id;
-            return (
-              <li key={link.id} className="nav-link-item">
-                <button
-                  type="button"
-                  onClick={(e) => handleNavClick(e, link.id)}
-                  className={`nav-link-btn ${isActive ? 'active' : ''}`}
-                >
-                  {link.label}
-                  {isActive && <span className="nav-active-glow-line" />}
-                </button>
-              </li>
-            );
-          })}
-        </ul>
+        {/* 2. Center Island: Nav Links Capsule */}
+        <nav className="nav-center-island nav-island-capsule" aria-label="Sections">
+          <ul className="nav-links-cluster">
+            {navLinks.map((link) => {
+              const isActive = activeSection === link.id;
+              return (
+                <li key={link.id} className="nav-link-item">
+                  <button
+                    type="button"
+                    onClick={(e) => handleNavClick(e, link.id)}
+                    className={`nav-link-btn ${isActive ? 'active' : ''}`}
+                  >
+                    <span className="nav-link-label">{link.label}</span>
+                    {isActive && (
+                      <span className="nav-active-glow-line">
+                        <span className="nav-active-core-dot" />
+                      </span>
+                    )}
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
+        </nav>
 
-        {/* Action Button & Mobile Toggle */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
+        {/* 3. Right Island: Action Capsule & Mobile Toggle */}
+        <div className="nav-right-actions">
           <button
             type="button"
             onClick={(e) => handleNavClick(e, 'join')}
-            className="nav-action-join"
+            className="nav-action-join nav-island-capsule"
           >
             <span>Join Us</span>
             <ArrowRight size={13} />
           </button>
           <button
-            className="mobile-menu-toggle"
+            className="mobile-menu-toggle nav-island-capsule"
             onClick={() => setIsMobileOpen(!isMobileOpen)}
             aria-label="Toggle navigation menu"
           >
             {isMobileOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
         </div>
-      </nav>
+      </div>
 
       {/* Mobile Drawer */}
       {isMobileOpen && (

@@ -101,23 +101,18 @@ export const ADMIN_MANAGERS = [
 export const DOMAIN_TEAMS = [
   {
     id: 'technical',
+    departmentNumber: '01',
     title: 'Technical Team',
-    desc: 'Architecting scalable web systems, algorithmic frameworks, open-source solutions, and hackathon prototypes.',
+    iconName: 'Code2',
+    desc: 'Architecting scalable web platforms, core algorithmic frameworks, open-source repositories, and hackathon prototypes.',
     lead: {
       id: 'tech-lead',
       name: 'Krishna Chaitanya Kona',
-      role: 'Lead',
+      role: 'Team Lead',
       quote: 'Building foundational technical systems that power the chapter’s computational vision.',
       socials: { github: 'https://github.com', linkedin: 'https://linkedin.com' },
     },
     members: [
-      {
-        id: 'tech-manager',
-        name: 'Vishrabdha Chatterjee',
-        role: 'Manager',
-        quote: 'Coordinating core technical workflows, code reviews, and developer environments.',
-        socials: { github: 'https://github.com', linkedin: 'https://linkedin.com' },
-      },
       {
         id: 'tech-colead-1',
         name: 'Litheeswar Kakarla',
@@ -132,16 +127,25 @@ export const DOMAIN_TEAMS = [
         quote: 'Fostering innovative student engineering and open-source contributions.',
         socials: { github: 'https://github.com', linkedin: 'https://linkedin.com' },
       },
+      {
+        id: 'tech-manager',
+        name: 'Vishrabdha Chatterjee',
+        role: 'Technical Project Manager',
+        quote: 'Coordinating core technical workflows, code reviews, and developer environments.',
+        socials: { github: 'https://github.com', linkedin: 'https://linkedin.com' },
+      },
     ],
   },
   {
     id: 'events',
+    departmentNumber: '02',
     title: 'Event Management Team',
+    iconName: 'CalendarCheck',
     desc: 'Executing premier flagship hackathons, high-energy tech speaker summits, workshops, and student engagements.',
     lead: {
       id: 'event-lead',
       name: 'Tetala Lakshmi Sreeraghava',
-      role: 'Lead',
+      role: 'Team Lead',
       quote: 'Curating seamless technical experiences and high-impact chapter gatherings.',
       socials: { github: 'https://github.com', linkedin: 'https://linkedin.com' },
     },
@@ -164,12 +168,14 @@ export const DOMAIN_TEAMS = [
   },
   {
     id: 'social-media',
+    departmentNumber: '03',
     title: 'Social Media Team',
+    iconName: 'Share2',
     desc: 'Amplifying chapter achievements, spotlighting members, and driving digital reach across global platforms.',
     lead: {
       id: 'social-lead',
       name: 'Vishwath',
-      role: 'Lead',
+      role: 'Team Lead',
       quote: 'Broadcasting the story of ACM VIT-AP to global student and developer networks.',
       socials: { github: 'https://github.com', linkedin: 'https://linkedin.com' },
     },
@@ -192,12 +198,14 @@ export const DOMAIN_TEAMS = [
   },
   {
     id: 'creative',
+    departmentNumber: '04',
     title: 'Creative and Design Team',
+    iconName: 'Palette',
     desc: 'Crafting visually arresting graphic identities, 3D brand assets, user interfaces, and media motion designs.',
     lead: {
       id: 'creative-lead',
       name: 'Akshitha Baby',
-      role: 'Lead',
+      role: 'Team Lead',
       quote: 'Designing the visual language of futuristic computing and interactive art.',
       socials: { github: 'https://github.com', linkedin: 'https://linkedin.com' },
     },
@@ -213,16 +221,19 @@ export const DOMAIN_TEAMS = [
   },
   {
     id: 'marketing',
+    departmentNumber: '05',
     title: 'Marketing Team',
+    iconName: 'Megaphone',
     desc: 'Forging corporate outreach, expanding sponsorships, public relations, and cross-chapter collaborations.',
-    lead: {
-      id: 'marketing-lead-1',
-      name: 'Geethika Varma Sagiraju',
-      role: 'Manager',
-      quote: 'Strategic positioning and outreach to industry leaders and corporate sponsors.',
-      socials: { github: 'https://github.com', linkedin: 'https://linkedin.com' },
-    },
+    lead: null,
     members: [
+      {
+        id: 'marketing-lead-1',
+        name: 'Geethika Varma Sagiraju',
+        role: 'Manager',
+        quote: 'Strategic positioning and outreach to industry leaders and corporate sponsors.',
+        socials: { github: 'https://github.com', linkedin: 'https://linkedin.com' },
+      },
       {
         id: 'marketing-lead-2',
         name: 'G Hansika Reddy',
@@ -234,12 +245,14 @@ export const DOMAIN_TEAMS = [
   },
   {
     id: 'project-research',
+    departmentNumber: '06',
     title: 'Project and Research Team',
+    iconName: 'FlaskConical',
     desc: 'Exploring deep computing paradigms, machine intelligence, papers, and production-grade prototypes.',
     lead: {
       id: 'research-lead',
       name: 'Tanuj R',
-      role: 'Lead',
+      role: 'Team Lead',
       quote: 'Investigating next-generation algorithms and guiding open project explorations.',
       socials: { github: 'https://github.com', linkedin: 'https://linkedin.com' },
     },
@@ -255,12 +268,14 @@ export const DOMAIN_TEAMS = [
   },
   {
     id: 'documentation',
+    departmentNumber: '07',
     title: 'Documentation Team',
+    iconName: 'FileText',
     desc: 'Maintaining meticulous reports, technical documentation, event retrospectives, and official publications.',
     lead: {
       id: 'doc-lead',
       name: 'Venuturumilli Tejaswini',
-      role: 'Lead',
+      role: 'Team Lead',
       quote: 'Chronicle of our technical journey, preserving knowledge for future generations.',
       socials: { github: 'https://github.com', linkedin: 'https://linkedin.com' },
     },
