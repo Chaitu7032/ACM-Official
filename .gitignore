@@ -58,3 +58,6 @@ coverage/
 .eslintcache
 .temp/
 tmp/
+
+# Raw media / source photos containing unstripped metadata or reg numbers
+public/team members/
