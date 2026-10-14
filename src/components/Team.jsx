@@ -78,15 +78,10 @@ function MemberCard({ member, variant = 'standard', index = 0, layout = 'auto' }
       className={`team-glass-member-card card-${variant} ${isSpotlight ? 'card-spotlight-horizontal' : ''}`}
       style={{ animationDelay: `${index * 60}ms` }}
     >
-      {/* Decorative Corner Cyber Brackets */}
-      <span className="card-corner-bracket top-left" aria-hidden="true" />
-      <span className="card-corner-bracket bottom-right" aria-hidden="true" />
-
       {isSpotlight ? (
         /* Spotlight Horizontal Layout for Team Lead */
         <div className="spotlight-card-inner">
           <div className="member-avatar-placeholder spotlight-avatar">
-            <div className="avatar-hologram-glow" aria-hidden="true" />
             <div className="avatar-initials-badge">
               {hasPhoto ? (
                 <img
@@ -152,7 +147,6 @@ function MemberCard({ member, variant = 'standard', index = 0, layout = 'auto' }
           )}
 
           <div className="member-avatar-placeholder">
-            <div className="avatar-hologram-glow" aria-hidden="true" />
             <div className="avatar-initials-badge">
               {hasPhoto ? (
                 <img
