@@ -4,19 +4,23 @@
 /* DESIGN TOKENS                                                              */
 /* ═══════════════════════════════════════════════════════════════════════════ */
 :root {
-  --font-display: 'Unbounded', sans-serif;
-  --font-body: 'Manrope', sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
-  --font-sans: 'Manrope', sans-serif;
-  --font-tech: 'JetBrains Mono', monospace;
+  --font-display: 'Space Grotesk', 'Unbounded', sans-serif;
+  --font-body: 'Inter', 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'IBM Plex Mono', 'JetBrains Mono', monospace;
+  --font-sans: 'Inter', 'Manrope', sans-serif;
+  --font-tech: 'IBM Plex Mono', 'JetBrains Mono', monospace;
 
   --bg-deep: #020617;
   --bg-dark: #030a1a;
+  --bg-navy-translucent: rgba(6, 17, 36, 0.72);
+  --bg-navy-card: rgba(8, 22, 48, 0.76);
+  --bg-navy-card-hover: rgba(12, 30, 64, 0.88);
   --bg-card: rgba(6, 17, 36, 0.78);
 
   --electric-blue: #1E90FF;
   --cyan-core: #00D4FF;
   --cyan-glow: #00F0FF;
+  --border-muted-blue: rgba(56, 114, 180, 0.22);
   --border-cyan: rgba(0, 212, 255, 0.28);
   --border-cyan-active: rgba(0, 212, 255, 0.65);
 
@@ -130,9 +134,17 @@ ol {
   background-repeat: no-repeat;
   pointer-events: none;
   will-change: transform;
-  transition: transform 0.12s cubic-bezier(0.16, 1, 0.3, 1);
-  /* Item 2: Filter the image itself to quiet the scene and tone down bright cyan floor rings */
+  transition: transform 0.12s cubic-bezier(0.16, 1, 0.3, 1), background-image 0.5s ease-in-out;
+  /* Filter the image itself to quiet the scene and tone down bright cyan floor rings */
   filter: brightness(0.75) saturate(0.85) contrast(1.05);
+}
+
+/* Teams Page Dedicated Cinematic Cosmic Background */
+.hangar-bg-layer.teams-page-bg {
+  background-image: url('/bg/teams-bg.jpg');
+  background-size: cover;
+  background-position: center top;
+  filter: brightness(0.48) saturate(0.82) contrast(1.15);
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════ */
@@ -163,6 +175,15 @@ ol {
       transparent 30%),
     /* e) Edge vignette to focus attention in the center */
     radial-gradient(ellipse at 60% 55%, transparent 40%, rgba(0, 0, 0, 0.6) 100%);
+  transition: opacity 0.4s ease;
+}
+
+/* On Teams page, apply a deep atmospheric scrim so the background remains atmospheric without dominating */
+.hangar-bg-layer.teams-page-bg ~ .hangar-dark-vignette {
+  opacity: 0.95;
+  background:
+    linear-gradient(180deg, rgba(2, 6, 18, 0.55) 0%, rgba(1, 4, 14, 0.72) 40%, rgba(1, 4, 12, 0.92) 100%),
+    radial-gradient(ellipse at 50% 30%, transparent 20%, rgba(1, 4, 14, 0.85) 80%);
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════ */
@@ -1521,29 +1542,29 @@ ol {
   box-shadow: 0 0 8px var(--cyan-core);
 }
 
-/* 2 in a Row Grid (for President & VP, and Club Manager & Tech Manager) */
+/* 2 in a Row Grid (for Co-Leads, President & VP, Managers) */
 .team-grid-2col {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 2rem;
+  gap: 1.5rem;
   width: 100%;
 }
 
 /* Executive Tier (President & VP side-by-side) has prominent width */
 .team-grid-2col.executive-tier {
-  max-width: 840px;
+  max-width: 780px;
 }
 
-/* Managers Tier has a balanced width, clean standard look */
+/* Co-Leads & Managers Tier has a balanced width, clean standard look without excessive empty space */
 .team-grid-2col.managers-tier {
-  max-width: 760px;
+  max-width: 700px;
 }
 
-/* 3 in a Row Grid (Secretary, Joint Secretary, Treasurer) */
+/* 3 in a Row Grid (Secretary, Joint Secretary, Treasurer & General Members) */
 .team-grid-3col {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1.6rem;
+  gap: 1.35rem;
   width: 100%;
 }
 
@@ -1554,31 +1575,30 @@ ol {
 }
 
 @media (max-width: 640px) {
-
   .team-grid-2col,
   .team-grid-3col {
     grid-template-columns: 1fr;
-    max-width: 400px;
+    max-width: 380px;
   }
 }
 
-/* Team Glass Member Card Variants */
+/* ─── Translucent Deep-Navy Cinematic Cards ───────────────────────────────── */
 .team-glass-member-card {
   position: relative;
-  background: rgba(6, 17, 36, 0.75);
-  border: 1px solid rgba(0, 212, 255, 0.28);
-  border-radius: 20px;
-  padding: 2rem 1.6rem;
+  background: var(--bg-navy-card);
+  border: 1px solid var(--border-muted-blue);
+  border-radius: 18px;
+  padding: 1.6rem 1.4rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 212, 255, 0.12);
-  animation: futuristicCardEntrance 0.55s cubic-bezier(0.16, 1, 0.3, 1) backwards;
-  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1),
-              box-shadow 0.4s cubic-bezier(0.2, 0.8, 0.2, 1),
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
+  animation: futuristicCardEntrance 0.5s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
+              box-shadow 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
               border-color 0.3s ease,
               background 0.3s ease;
   width: 100%;
@@ -1586,72 +1606,140 @@ ol {
   will-change: transform, box-shadow;
 }
 
-.team-glass-member-card::before {
-  content: '';
-  position: absolute;
-  top: -60%;
-  left: -130%;
-  width: 65%;
-  height: 220%;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(0, 212, 255, 0.09) 50%,
-    transparent 100%
-  );
-  transform: rotate(25deg);
-  pointer-events: none;
-  transition: left 0.85s ease;
-  z-index: 1;
-}
-
-.team-glass-member-card:hover::before {
-  left: 150%;
-}
-
+/* Thin muted border by default; restrained electric-cyan glow only on hover/focus */
 .team-glass-member-card:hover {
+  background: var(--bg-navy-card-hover);
+  border-color: rgba(0, 212, 255, 0.65);
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.65), 0 0 24px rgba(0, 212, 255, 0.22);
+  transform: translateY(-4px);
+}
+
+.team-glass-member-card:focus-visible {
   border-color: var(--cyan-core);
-  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.75), 0 0 35px rgba(0, 212, 255, 0.32);
-  transform: translateY(-6px) scale(1.01);
+  box-shadow: 0 0 0 2px rgba(0, 212, 255, 0.4), 0 0 20px rgba(0, 212, 255, 0.25);
+  outline: none;
 }
 
 /* Card Variant: Executive (President & VP) */
 .team-glass-member-card.card-executive {
-  background: linear-gradient(180deg, rgba(8, 26, 56, 0.88) 0%, rgba(4, 14, 34, 0.92) 100%);
-  border-color: rgba(0, 212, 255, 0.45);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7), 0 0 28px rgba(0, 212, 255, 0.22);
+  background: rgba(10, 26, 56, 0.82);
+  border-color: rgba(56, 114, 180, 0.32);
 }
 
-.team-glass-member-card.card-executive .member-role-pill {
-  background: rgba(0, 212, 255, 0.16);
-  border-color: rgba(0, 212, 255, 0.55);
+.team-glass-member-card.card-executive:hover {
+  border-color: rgba(0, 212, 255, 0.75);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7), 0 0 26px rgba(0, 212, 255, 0.25);
 }
 
 /* Card Variant: Managers */
 .team-glass-member-card.card-manager {
-  background: rgba(5, 15, 32, 0.75);
+  background: rgba(8, 22, 48, 0.76);
+}
+
+/* Card Variant: Spotlight Horizontal Card for Team Lead */
+.team-glass-member-card.card-spotlight-horizontal {
+  max-width: 680px;
+  width: 100%;
+  padding: 1.6rem 2rem;
+  background: rgba(10, 28, 62, 0.82);
+  border-color: rgba(56, 114, 180, 0.35);
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.55), 0 0 20px rgba(0, 212, 255, 0.1);
+}
+
+.team-glass-member-card.card-spotlight-horizontal:hover {
+  border-color: rgba(0, 212, 255, 0.75);
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.7), 0 0 30px rgba(0, 212, 255, 0.28);
+}
+
+.spotlight-card-inner {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 2.2rem;
+  width: 100%;
+  text-align: left;
+}
+
+.spotlight-avatar {
+  flex-shrink: 0;
+  margin-bottom: 0 !important;
+  width: 120px !important;
+  height: 120px !important;
+}
+
+.spotlight-info-column {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1;
+  min-width: 0;
+}
+
+.spotlight-info-column .member-role-pill {
+  margin-bottom: 0.6rem;
+}
+
+.spotlight-info-column .member-name-heading {
+  font-size: 1.45rem;
+  margin-bottom: 0.4rem;
+}
+
+.spotlight-info-column .member-quote-text {
+  margin-bottom: 0.85rem;
+  max-width: 100%;
+}
+
+@media (max-width: 640px) {
+  .spotlight-card-inner {
+    flex-direction: column;
+    text-align: center;
+    gap: 1.2rem;
+  }
+
+  .spotlight-info-column {
+    align-items: center;
+  }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  .team-glass-member-card {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .team-glass-member-card:hover {
+    transform: none !important;
+  }
 }
 
 /* Cyber Corner Brackets */
 .card-corner-bracket {
   position: absolute;
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
   pointer-events: none;
+  opacity: 0.45;
+  transition: opacity 0.3s ease, border-color 0.3s ease;
 }
 
 .card-corner-bracket.top-left {
-  top: 8px;
-  left: 8px;
-  border-top: 2px solid var(--cyan-core);
-  border-left: 2px solid var(--cyan-core);
+  top: 7px;
+  left: 7px;
+  border-top: 1.5px solid var(--border-cyan);
+  border-left: 1.5px solid var(--border-cyan);
 }
 
 .card-corner-bracket.bottom-right {
-  bottom: 8px;
-  right: 8px;
-  border-bottom: 2px solid var(--cyan-core);
-  border-right: 2px solid var(--cyan-core);
+  bottom: 7px;
+  right: 7px;
+  border-bottom: 1.5px solid var(--border-cyan);
+  border-right: 1.5px solid var(--border-cyan);
+}
+
+.team-glass-member-card:hover .card-corner-bracket {
+  opacity: 1;
+  border-color: var(--cyan-core);
 }
 
 /* Role Pill */
@@ -1659,12 +1747,12 @@ ol {
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
-  padding: 0.28rem 0.8rem;
-  background: rgba(0, 212, 255, 0.1);
-  border: 1px solid rgba(0, 212, 255, 0.35);
+  padding: 0.24rem 0.75rem;
+  background: rgba(0, 212, 255, 0.08);
+  border: 1px solid rgba(56, 114, 180, 0.3);
   border-radius: 9999px;
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: 0.64rem;
   font-weight: 600;
   letter-spacing: 0.12em;
   color: var(--cyan-core);
@@ -1719,25 +1807,31 @@ ol {
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background: linear-gradient(135deg, rgba(6, 22, 48, 0.9) 0%, rgba(10, 34, 72, 0.95) 100%);
-  border: 2px solid var(--cyan-core);
+  background: rgba(8, 20, 44, 0.95);
+  border: 1.5px solid var(--border-cyan);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+  box-shadow: 0 0 16px rgba(0, 212, 255, 0.28);
   overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.team-glass-member-card:hover .avatar-initials-badge {
+  border-color: var(--cyan-core);
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.45);
 }
 
 .avatar-icon-ghost {
-  color: rgba(0, 212, 255, 0.35);
+  color: rgba(0, 212, 255, 0.4);
   margin-bottom: 2px;
 }
 
 .avatar-initials-text {
   font-family: var(--font-display);
   font-size: 0.85rem;
-  font-weight: 800;
+  font-weight: 700;
   color: #ffffff;
   letter-spacing: 0.05em;
 }
@@ -1749,11 +1843,16 @@ ol {
 /* Member Name & Details */
 .member-name-heading {
   font-family: var(--font-display);
-  font-size: 1.15rem;
+  font-size: 1.12rem;
   font-weight: 700;
   color: #ffffff;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.85rem;
   letter-spacing: -0.01em;
+  min-height: 2.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1.25;
 }
 
 .team-glass-member-card.featured .member-name-heading {
@@ -1761,28 +1860,38 @@ ol {
 }
 
 .member-quote-text {
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  line-height: 1.55;
+  color: #cbd5e1;
+  font-style: italic;
+  margin-bottom: 1.15rem;
+  flex-grow: 1;
+  max-width: 320px;
+}
+
+.member-bio-text {
+  font-family: var(--font-body);
   font-size: 0.8rem;
   line-height: 1.5;
   color: var(--text-muted);
-  font-style: italic;
-  margin-bottom: 1.3rem;
-  flex-grow: 1;
-  max-width: 320px;
+  margin-bottom: 1rem;
+  max-width: 300px;
 }
 
 /* Socials Cluster */
 .member-socials-cluster {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.65rem;
 }
 
 .member-socials-cluster a {
-  width: 30px;
-  height: 30px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
-  background: rgba(4, 12, 28, 0.8);
-  border: 1px solid var(--border-cyan);
+  background: rgba(10, 24, 52, 0.85);
+  border: 1px solid var(--border-muted-blue);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1850,13 +1959,13 @@ ol {
   margin-bottom: 3.5rem;
 }
 
-/* Department Selection Card */
+/* Department Selection Card - Translucent Deep Navy */
 .dept-selection-card {
   position: relative;
-  background: rgba(6, 17, 36, 0.72);
-  border: 1px solid rgba(0, 212, 255, 0.22);
+  background: var(--bg-navy-card);
+  border: 1px solid var(--border-muted-blue);
   border-radius: 16px;
-  padding: 1.5rem 1.6rem;
+  padding: 1.4rem 1.5rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -1866,11 +1975,12 @@ ol {
   user-select: none;
   outline: none;
   overflow: hidden;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.45);
   animation: futuristicCardEntrance 0.5s cubic-bezier(0.16, 1, 0.3, 1) backwards;
-  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
-              background 0.35s ease,
-              border-color 0.35s ease,
-              box-shadow 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
+              background 0.3s ease,
+              border-color 0.3s ease,
+              box-shadow 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
   will-change: transform, box-shadow;
 }
 
@@ -1907,10 +2017,10 @@ ol {
 }
 
 .dept-selection-card:hover {
-  background: rgba(8, 26, 56, 0.88);
+  background: var(--bg-navy-card-hover);
   border-color: rgba(0, 212, 255, 0.65);
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6), 0 0 28px rgba(0, 212, 255, 0.25);
-  transform: translateY(-4px) scale(1.008);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.6), 0 0 24px rgba(0, 212, 255, 0.2);
+  transform: translateY(-4px);
 }
 
 .dept-selection-card:active {
@@ -1920,14 +2030,14 @@ ol {
 
 .dept-selection-card:focus-visible {
   border-color: var(--cyan-core);
-  box-shadow: 0 0 0 2px rgba(0, 212, 255, 0.45), 0 0 28px rgba(0, 212, 255, 0.4);
+  box-shadow: 0 0 0 2px rgba(0, 212, 255, 0.4), 0 0 24px rgba(0, 212, 255, 0.3);
 }
 
 /* Selected Active Department Card */
 .dept-selection-card.selected {
-  background: linear-gradient(135deg, rgba(8, 28, 64, 0.92) 0%, rgba(5, 18, 42, 0.95) 100%);
+  background: rgba(10, 28, 64, 0.92);
   border-color: var(--cyan-core);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7), 0 0 32px rgba(0, 212, 255, 0.35), inset 0 0 20px rgba(0, 212, 255, 0.08);
+  box-shadow: 0 14px 38px rgba(0, 0, 0, 0.7), 0 0 28px rgba(0, 212, 255, 0.32), inset 0 0 20px rgba(0, 212, 255, 0.06);
 }
 
 /* Corner Cyber Accents on Cards */
@@ -2099,24 +2209,25 @@ ol {
   display: inline-flex;
   align-items: center;
   gap: 0.65rem;
-  padding: 0.55rem 1.15rem;
-  background: rgba(6, 17, 36, 0.85);
-  border: 1px solid rgba(0, 212, 255, 0.35);
+  padding: 0.5rem 1.15rem;
+  background: var(--bg-navy-card);
+  border: 1px solid var(--border-muted-blue);
   border-radius: 9999px;
   color: #ffffff;
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: 0.74rem;
   font-weight: 600;
   letter-spacing: 0.06em;
   cursor: pointer;
   transition: all 0.25s ease;
   backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .dept-back-btn:hover {
-  background: rgba(0, 212, 255, 0.15);
-  border-color: var(--cyan-core);
-  box-shadow: 0 0 16px rgba(0, 212, 255, 0.3);
+  background: var(--bg-navy-card-hover);
+  border-color: rgba(0, 212, 255, 0.65);
+  box-shadow: 0 0 16px rgba(0, 212, 255, 0.25);
   transform: translateX(-3px);
 }
 
@@ -2217,7 +2328,7 @@ ol {
   }
 }
 
-/* 1 Column Center for Domain Lead */
+/* 1 Column Center for Domain Lead Spotlight */
 .team-grid-1col-center {
   display: flex;
   justify-content: center;
@@ -2225,19 +2336,25 @@ ol {
 }
 
 .team-grid-1col-center .team-glass-member-card {
-  max-width: 380px;
+  max-width: 680px;
 }
 
-/* Card Variant: Lead */
+/* Card Variant: Lead - Translucent Deep Navy Spotlight */
 .team-glass-member-card.card-lead {
-  background: linear-gradient(180deg, rgba(8, 28, 60, 0.88) 0%, rgba(4, 14, 34, 0.92) 100%);
-  border-color: rgba(0, 212, 255, 0.55);
-  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.7), 0 0 35px rgba(0, 212, 255, 0.28);
+  background: rgba(10, 28, 62, 0.82);
+  border-color: rgba(56, 114, 180, 0.35);
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.55), 0 0 20px rgba(0, 212, 255, 0.1);
+}
+
+.team-glass-member-card.card-lead:hover {
+  background: var(--bg-navy-card-hover);
+  border-color: rgba(0, 212, 255, 0.75);
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.7), 0 0 30px rgba(0, 212, 255, 0.28);
 }
 
 .team-glass-member-card.card-lead .member-role-pill {
-  background: rgba(0, 212, 255, 0.2);
-  border-color: #00F0FF;
+  background: rgba(0, 212, 255, 0.12);
+  border-color: rgba(0, 212, 255, 0.45);
   color: #ffffff;
 }
 

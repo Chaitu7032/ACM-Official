@@ -50,7 +50,7 @@ const LinkedinIcon = ({ size = 15 }) => (
 );
 
 // Member Avatar & Profile Card Component
-function MemberCard({ member, variant = 'standard', index = 0 }) {
+function MemberCard({ member, variant = 'standard', index = 0, layout = 'auto' }) {
   const [imgFailed, setImgFailed] = useState(false);
 
   const initials = member.name
@@ -66,83 +66,134 @@ function MemberCard({ member, variant = 'standard', index = 0 }) {
   const hasPhoto = Boolean(member.photo && !imgFailed);
   const hasSocials = Boolean(member.socials && (member.socials.linkedin || member.socials.github || member.socials.website));
 
+  // In side-by-side 2-col grids, both cards must use identical balanced vertical layout
+  const isSpotlight = layout === 'vertical' ? false : (variant === 'lead' || variant === 'spotlight');
+
   return (
     <div
-      className={`team-glass-member-card card-${variant}`}
-      style={{ animationDelay: `${index * 70}ms` }}
+      className={`team-glass-member-card card-${variant} ${isSpotlight ? 'card-spotlight-horizontal' : ''}`}
+      style={{ animationDelay: `${index * 60}ms` }}
     >
       {/* Decorative Corner Cyber Brackets */}
       <span className="card-corner-bracket top-left" aria-hidden="true" />
       <span className="card-corner-bracket bottom-right" aria-hidden="true" />
 
-      {/* Role Pill */}
-      {member.role && (
-        <div className="member-role-pill">
-          <span className="role-dot" aria-hidden="true" />
-          <span>{member.role}</span>
+      {isSpotlight ? (
+        /* Spotlight Horizontal Layout for Team Lead */
+        <div className="spotlight-card-inner">
+          <div className="member-avatar-placeholder spotlight-avatar">
+            <div className="avatar-hologram-glow" aria-hidden="true" />
+            <div className="avatar-initials-badge">
+              {hasPhoto ? (
+                <img
+                  src={member.photo}
+                  alt={member.name}
+                  className="member-profile-img"
+                  onError={() => setImgFailed(true)}
+                  loading="lazy"
+                />
+              ) : (
+                <>
+                  <User size={30} className="avatar-icon-ghost" aria-hidden="true" />
+                  <span className="avatar-initials-text">{initials}</span>
+                </>
+              )}
+            </div>
+          </div>
+
+          <div className="spotlight-info-column">
+            {member.role && (
+              <div className="member-role-pill">
+                <span className="role-dot" aria-hidden="true" />
+                <span>{member.role}</span>
+              </div>
+            )}
+
+            <h3 className="member-name-heading">{member.name}</h3>
+
+            {hasSocials && (
+              <div className="member-socials-cluster">
+                {member.socials.linkedin && (
+                  <a
+                    href={member.socials.linkedin}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    aria-label={`${member.name}'s LinkedIn profile`}
+                  >
+                    <LinkedinIcon />
+                  </a>
+                )}
+                {member.socials.github && (
+                  <a
+                    href={member.socials.github}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    aria-label={`${member.name}'s GitHub profile`}
+                  >
+                    <GithubIcon />
+                  </a>
+                )}
+              </div>
+            )}
+          </div>
         </div>
-      )}
-
-      {/* Profile Photo Frame with Avatar / Initials Fallback */}
-      <div className="member-avatar-placeholder">
-        <div className="avatar-hologram-glow" aria-hidden="true" />
-        <div className="avatar-initials-badge">
-          {hasPhoto ? (
-            <img
-              src={member.photo}
-              alt={member.name}
-              className="member-profile-img"
-              onError={() => setImgFailed(true)}
-            />
-          ) : (
-            <>
-              <User size={variant === 'executive' || variant === 'lead' ? 26 : 22} className="avatar-icon-ghost" aria-hidden="true" />
-              <span className="avatar-initials-text">{initials}</span>
-            </>
+      ) : (
+        /* Balanced Column Layout for Co-Leads, Managers, and Team Members */
+        <>
+          {member.role && (
+            <div className="member-role-pill">
+              <span className="role-dot" aria-hidden="true" />
+              <span>{member.role}</span>
+            </div>
           )}
-        </div>
-      </div>
 
-      {/* Member Info */}
-      <h3 className="member-name-heading">{member.name}</h3>
+          <div className="member-avatar-placeholder">
+            <div className="avatar-hologram-glow" aria-hidden="true" />
+            <div className="avatar-initials-badge">
+              {hasPhoto ? (
+                <img
+                  src={member.photo}
+                  alt={member.name}
+                  className="member-profile-img"
+                  onError={() => setImgFailed(true)}
+                  loading="lazy"
+                />
+              ) : (
+                <>
+                  <User size={22} className="avatar-icon-ghost" aria-hidden="true" />
+                  <span className="avatar-initials-text">{initials}</span>
+                </>
+              )}
+            </div>
+          </div>
 
-      {member.quote && <p className="member-quote-text">"{member.quote}"</p>}
-      {member.bio && <p className="member-bio-text">{member.bio}</p>}
+          <h3 className="member-name-heading">{member.name}</h3>
 
-      {/* Social Strip — Only display social links that actually exist in the data */}
-      {hasSocials && (
-        <div className="member-socials-cluster">
-          {member.socials.linkedin && (
-            <a
-              href={member.socials.linkedin}
-              target="_blank"
-              rel="noreferrer noopener"
-              aria-label={`${member.name}'s LinkedIn profile`}
-            >
-              <LinkedinIcon />
-            </a>
+          {hasSocials && (
+            <div className="member-socials-cluster">
+              {member.socials.linkedin && (
+                <a
+                  href={member.socials.linkedin}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  aria-label={`${member.name}'s LinkedIn profile`}
+                >
+                  <LinkedinIcon />
+                </a>
+              )}
+              {member.socials.github && (
+                <a
+                  href={member.socials.github}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  aria-label={`${member.name}'s GitHub profile`}
+                >
+                  <GithubIcon />
+                </a>
+              )}
+            </div>
           )}
-          {member.socials.github && (
-            <a
-              href={member.socials.github}
-              target="_blank"
-              rel="noreferrer noopener"
-              aria-label={`${member.name}'s GitHub profile`}
-            >
-              <GithubIcon />
-            </a>
-          )}
-          {member.socials.website && (
-            <a
-              href={member.socials.website}
-              target="_blank"
-              rel="noreferrer noopener"
-              aria-label={`${member.name}'s website`}
-            >
-              <ExternalLink size={15} />
-            </a>
-          )}
-        </div>
+        </>
       )}
     </div>
   );
@@ -387,6 +438,7 @@ export default function Team() {
                           key={member.id}
                           member={member}
                           index={i}
+                          layout="vertical"
                           variant={member.role && member.role.toLowerCase().includes('lead') && !member.role.toLowerCase().includes('co-lead') ? 'lead' : 'officer'}
                         />
                       ))}

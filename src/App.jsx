@@ -236,9 +236,9 @@ export default function App() {
       {/* Intro sequence loader */}
       <Loader onComplete={() => setIsLoaded(true)} />
 
-      {/* Layer 1: Hangar space-station window background plate with parallax */}
+      {/* Layer 1: Atmospheric Background Plate with Parallax & Page Adaptability */}
       <div
-        className="hangar-bg-layer"
+        className={`hangar-bg-layer ${activeTab === 'teams' ? 'teams-page-bg' : ''}`}
         style={{
           transform: reducedMotion
             ? 'none'
