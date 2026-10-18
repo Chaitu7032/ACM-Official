@@ -132,65 +132,7 @@ function GallerySection() {
   );
 }
 
-// ─── CLOSING SECTION & FOOTER (Panel 11 & 12) ───────────────────────────────
-function ClosingSection() {
-  return (
-    <section className="section-full closing-section" id="join">
-      <div className="closing-card">
-        <div className="closing-content">
-          <div className="section-eyebrow-badge">
-            <span>Join Our Chapter</span>
-          </div>
-          <h2 className="section-headline-large" style={{ fontSize: 'clamp(2.4rem, 4vw, 3.8rem)' }}>
-            YOUR NEXT CHAPTER<br />
-            <span className="blue-highlight">STARTS HERE.</span>
-          </h2>
-          <p className="section-subtext-lede" style={{ marginBottom: '2.5rem' }}>
-            Be part of a global community of builders, problem-solvers, and innovators.
-          </p>
-          <div style={{ display: 'flex', gap: '1.2rem', flexWrap: 'wrap' }}>
-            <a href="mailto:acm@vitap.ac.in" className="btn-primary-glow">
-              <span>Join ACM Chapter</span>
-              <ArrowRight size={15} />
-            </a>
-            <a href="mailto:acm@vitap.ac.in" className="btn-glass-secondary">
-              <span>Contact Us</span>
-            </a>
-          </div>
-        </div>
-
-        <div className="closing-portal-visual">
-          <div className="portal-ring portal-ring--1" />
-          <div className="portal-ring portal-ring--2" />
-          <div className="portal-ring portal-ring--3" />
-          <div className="portal-core" />
-        </div>
-      </div>
-
-      <footer className="site-footer">
-        <div className="footer-brand-side">
-          <div className="footer-logo-row">
-            <img src="/acm-logo.svg" alt="ACM Logo" width={28} height={28} />
-            <span className="footer-brand-name">ACM STUDENT CHAPTER · VIT-AP</span>
-          </div>
-          <p className="footer-tagline">"See you in the next idea." — NEX</p>
-        </div>
-        <div className="footer-links-side">
-          <div className="footer-nav-col">
-            <a href="#home">Home</a>
-            <a href="#about">About</a>
-            <a href="#events">Events</a>
-            <a href="#teams">Teams</a>
-            <a href="#gallery">Gallery</a>
-          </div>
-          <div className="footer-copyright">
-            © {new Date().getFullYear()} ACM VIT-AP Student Chapter. Built for builders.
-          </div>
-        </div>
-      </footer>
-    </section>
-  );
-}
+import Contact from './components/Contact.jsx';
 
 // ─── MASTER APP COMPONENT ───────────────────────────────────────────────────
 export default function App() {
@@ -204,8 +146,8 @@ export default function App() {
   useEffect(() => {
     const handleHash = () => {
       const hash = window.location.hash.replace('#', '');
-      if (['home', 'about', 'events', 'teams', 'gallery', 'join'].includes(hash)) {
-        setActiveTab(hash);
+      if (['home', 'about', 'events', 'teams', 'gallery', 'join', 'contact'].includes(hash)) {
+        setActiveTab(hash === 'join' ? 'contact' : hash);
       }
     };
     handleHash();
@@ -214,8 +156,9 @@ export default function App() {
   }, []);
 
   const handleNavigate = (tabId) => {
-    setActiveTab(tabId);
-    window.location.hash = `#${tabId}`;
+    const targetTab = tabId === 'join' ? 'contact' : tabId;
+    setActiveTab(targetTab);
+    window.location.hash = `#${targetTab}`;
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -304,9 +247,9 @@ export default function App() {
           </div>
         )}
 
-        {activeTab === 'join' && (
-          <div key="view-join" className="view-container">
-            <ClosingSection />
+        {(activeTab === 'contact' || activeTab === 'join') && (
+          <div key="view-contact" className="view-container">
+            <Contact />
           </div>
         )}
       </main>

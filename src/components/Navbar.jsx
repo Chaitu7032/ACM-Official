@@ -24,6 +24,8 @@ export default function Navbar({ activeSection = 'home', onNavigate }) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const isContactActive = activeSection === 'contact' || activeSection === 'join';
+
   return (
     <header className="floating-nav-wrapper">
       <div className="nav-divided-bar" aria-label="Main Navigation">
@@ -77,10 +79,10 @@ export default function Navbar({ activeSection = 'home', onNavigate }) {
         <div className="nav-right-actions">
           <button
             type="button"
-            onClick={(e) => handleNavClick(e, 'join')}
-            className="nav-action-join nav-island-capsule"
+            onClick={(e) => handleNavClick(e, 'contact')}
+            className={`nav-action-join nav-island-capsule ${isContactActive ? 'active' : ''}`}
           >
-            <span>Join Us</span>
+            <span>Contact Us</span>
             <ArrowRight size={13} />
           </button>
           <button
@@ -101,7 +103,7 @@ export default function Navbar({ activeSection = 'home', onNavigate }) {
               key={link.id}
               type="button"
               onClick={(e) => handleNavClick(e, link.id)}
-              className="nav-link-btn"
+              className={`nav-link-btn ${activeSection === link.id ? 'active' : ''}`}
               style={{ textAlign: 'left', width: '100%', padding: '0.6rem 0' }}
             >
               {link.label}
@@ -109,11 +111,11 @@ export default function Navbar({ activeSection = 'home', onNavigate }) {
           ))}
           <button
             type="button"
-            onClick={(e) => handleNavClick(e, 'join')}
-            className="mobile-join-link"
+            onClick={(e) => handleNavClick(e, 'contact')}
+            className={`mobile-join-link ${isContactActive ? 'active' : ''}`}
             style={{ textAlign: 'left', background: 'transparent', border: 'none' }}
           >
-            Join Us →
+            Contact Us →
           </button>
         </div>
       )}
