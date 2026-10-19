@@ -9,6 +9,7 @@ import Navbar from './components/Navbar.jsx';
 import Hero from './components/Hero.jsx';
 import Events from './components/Events.jsx';
 import Team from './components/Team.jsx';
+import About from './components/About.jsx';
 
 import SpaceAtmosphere from './components/SpaceAtmosphere.jsx';
 import CursorEffects from './components/CursorEffects.jsx';
@@ -225,7 +226,7 @@ export default function App() {
 
         {activeTab === 'about' && (
           <div key="view-about" className="view-container">
-            <AboutSection />
+            <About onNavigate={handleNavigate} />
           </div>
         )}
 

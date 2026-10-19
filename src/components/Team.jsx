@@ -8,7 +8,7 @@ import {
   Terminal,
   Crown,
   Users,
-  Sparkles,
+  Star,
   Code2,
   CalendarCheck,
   Share2,
@@ -88,6 +88,7 @@ function MemberCard({ member, variant = 'standard', index = 0, layout = 'auto' }
                   src={member.photo}
                   alt={member.name}
                   className="member-profile-img"
+                  style={member.photoCrop ? { objectPosition: member.photoCrop } : undefined}
                   onError={() => setImgFailed(true)}
                   loading="lazy"
                 />
@@ -153,6 +154,7 @@ function MemberCard({ member, variant = 'standard', index = 0, layout = 'auto' }
                   src={member.photo}
                   alt={member.name}
                   className="member-profile-img"
+                  style={member.photoCrop ? { objectPosition: member.photoCrop } : undefined}
                   onError={() => setImgFailed(true)}
                   loading="lazy"
                 />
@@ -536,8 +538,54 @@ export default function Team() {
 
               {/* Department Team Members Display */}
               <div className="dept-hierarchy-wrapper">
-                {/* SPECIAL CASE: If exactly 2 people in the department, render them side by side */}
-                {totalDeptMembers.length === 2 ? (
+                {/* EXPLICIT HIERARCHY (e.g. Event Management Team or defined hierarchy tiers) */}
+                {selectedDepartment.hierarchyTiers ? (
+                  selectedDepartment.hierarchyTiers.map((tier, idx) => (
+                    <React.Fragment key={tier.title || idx}>
+                      <div className="admin-tier-section">
+                        <div className="tier-header-badge">
+                          {idx === 0 ? <Crown size={14} /> : <Users size={14} />}
+                          <span>{tier.title}</span>
+                        </div>
+                        <div className={tier.members.length === 1 ? 'team-grid-1col-center' : 'team-grid-2col managers-tier'}>
+                          {tier.members.map((member, mIdx) => (
+                            <MemberCard
+                              key={member.id}
+                              member={member}
+                              variant={tier.variant || (idx === 0 ? 'lead' : 'officer')}
+                              index={mIdx}
+                            />
+                          ))}
+                        </div>
+                      </div>
+                      {idx < selectedDepartment.hierarchyTiers.length - 1 && (
+                        <div className="tier-connector-line" />
+                      )}
+                    </React.Fragment>
+                  ))
+                ) : selectedDepartment.hierarchy ? (
+                  selectedDepartment.hierarchy.map((member, idx) => (
+                    <React.Fragment key={member.id}>
+                      <div className="admin-tier-section">
+                        <div className="tier-header-badge">
+                          {idx === 0 ? <Crown size={14} /> : <Users size={14} />}
+                          <span>{member.role}</span>
+                        </div>
+                        <div className="team-grid-1col-center">
+                          <MemberCard
+                            member={member}
+                            variant={idx === 0 ? 'lead' : idx === 1 ? 'officer' : 'standard'}
+                            index={idx}
+                          />
+                        </div>
+                      </div>
+                      {idx < selectedDepartment.hierarchy.length - 1 && (
+                        <div className="tier-connector-line" />
+                      )}
+                    </React.Fragment>
+                  ))
+                ) : totalDeptMembers.length === 2 ? (
+                  /* SPECIAL CASE: If exactly 2 people in the department, render them side by side */
                   <div className="admin-tier-section">
                     <div className="tier-header-badge">
                       <Users size={14} />
@@ -562,7 +610,7 @@ export default function Team() {
                     {leads.length > 0 && (
                       <div className="admin-tier-section">
                         <div className="tier-header-badge">
-                          <Sparkles size={14} />
+                          <Crown size={14} />
                           <span>Team Lead</span>
                         </div>
                         <div className="team-grid-1col-center">
