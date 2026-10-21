@@ -304,46 +304,48 @@ export default function Team() {
       </div>
 
       {/* Segmented Controller (Faculty Coordinator | Admin Team | Domains & Departments) */}
-      <div className="team-filter-tabs-strip" role="tablist" aria-label="Team View Selector">
-        <button
-          type="button"
-          role="tab"
-          aria-selected={activeTab === 'faculty'}
-          className={`team-subtab-pill ${activeTab === 'faculty' ? 'active' : ''}`}
-          onClick={() => {
-            setActiveTab('faculty');
-            setActiveDepartmentId(null);
-          }}
-        >
-          <GraduationCap size={15} className="tab-icon" />
-          <span className="tab-label">Faculty Coordinator</span>
-          <span className="tab-indicator-badge">Mentor</span>
-        </button>
-        <button
-          type="button"
-          role="tab"
-          aria-selected={activeTab === 'admin'}
-          className={`team-subtab-pill ${activeTab === 'admin' ? 'active' : ''}`}
-          onClick={() => {
-            setActiveTab('admin');
-            setActiveDepartmentId(null);
-          }}
-        >
-          <Shield size={15} className="tab-icon" />
-          <span className="tab-label">Core Administration</span>
-          <span className="tab-indicator-badge">Tier I</span>
-        </button>
-        <button
-          type="button"
-          role="tab"
-          aria-selected={activeTab === 'domains'}
-          className={`team-subtab-pill ${activeTab === 'domains' ? 'active' : ''}`}
-          onClick={() => setActiveTab('domains')}
-        >
-          <Terminal size={15} className="tab-icon" />
-          <span className="tab-label">Domains & Departments</span>
-          <span className="tab-indicator-badge">7 Leads</span>
-        </button>
+      <div className="team-filter-tabs-wrapper">
+        <div className="team-filter-tabs-strip" role="tablist" aria-label="Team View Selector">
+          <button
+            type="button"
+            role="tab"
+            aria-selected={activeTab === 'faculty'}
+            className={`team-subtab-pill ${activeTab === 'faculty' ? 'active' : ''}`}
+            onClick={() => {
+              setActiveTab('faculty');
+              setActiveDepartmentId(null);
+            }}
+          >
+            <GraduationCap size={15} className="tab-icon" />
+            <span className="tab-label">Faculty Coordinator</span>
+            <span className="tab-indicator-badge">Mentor</span>
+          </button>
+          <button
+            type="button"
+            role="tab"
+            aria-selected={activeTab === 'admin'}
+            className={`team-subtab-pill ${activeTab === 'admin' ? 'active' : ''}`}
+            onClick={() => {
+              setActiveTab('admin');
+              setActiveDepartmentId(null);
+            }}
+          >
+            <Shield size={15} className="tab-icon" />
+            <span className="tab-label">Core Administration</span>
+            <span className="tab-indicator-badge">Tier I</span>
+          </button>
+          <button
+            type="button"
+            role="tab"
+            aria-selected={activeTab === 'domains'}
+            className={`team-subtab-pill ${activeTab === 'domains' ? 'active' : ''}`}
+            onClick={() => setActiveTab('domains')}
+          >
+            <Terminal size={15} className="tab-icon" />
+            <span className="tab-label">Domains & Departments</span>
+            <span className="tab-indicator-badge">7 Leads</span>
+          </button>
+        </div>
       </div>
 
       {activeTab === 'faculty' ? (
@@ -443,13 +445,13 @@ export default function Team() {
       ) : activeTab === 'admin' ? (
         /* ─── 1] ADMIN TEAM VIEW ─────────────────────────────────────── */
         <div className="admin-team-structured-layout">
-          {/* ROW 1: 2 in a row (President & Vice President side-by-side) */}
+          {/* ROW 1: 3 in a row (Chief Advisor, President, Vice President) */}
           <div className="admin-tier-section">
             <div className="tier-header-badge">
               <Crown size={14} />
-              <span>Executive Presidency</span>
+              <span>Core Presidency & Executive Advisory</span>
             </div>
-            <div className="team-grid-2col executive-tier">
+            <div className="team-grid-3col executive-tier">
               {ADMIN_PRESIDENCY.map((member) => (
                 <MemberCard key={member.id} member={member} variant="executive" />
               ))}

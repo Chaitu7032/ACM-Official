@@ -11,6 +11,11 @@ export default function CursorEffects() {
   const dotRef = useRef(null);
 
   useEffect(() => {
+    // Disable custom cursor and magnetic physics on touch devices
+    if (window.matchMedia('(pointer: coarse)').matches) {
+      return;
+    }
+
     let mouseX = -100;
     let mouseY = -100;
 

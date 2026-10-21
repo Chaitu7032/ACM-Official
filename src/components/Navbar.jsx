@@ -97,25 +97,25 @@ export default function Navbar({ activeSection = 'home', onNavigate }) {
 
       {/* Mobile Drawer */}
       {isMobileOpen && (
-        <div className="mobile-nav-drawer">
+        <div className="mobile-nav-drawer" role="dialog" aria-label="Mobile Navigation">
           {navLinks.map((link) => (
             <button
               key={link.id}
               type="button"
               onClick={(e) => handleNavClick(e, link.id)}
               className={`nav-link-btn ${activeSection === link.id ? 'active' : ''}`}
-              style={{ textAlign: 'left', width: '100%', padding: '0.6rem 0' }}
             >
-              {link.label}
+              <span className="mobile-link-text">{link.label}</span>
+              {activeSection === link.id && <span className="mobile-active-pill" />}
             </button>
           ))}
           <button
             type="button"
             onClick={(e) => handleNavClick(e, 'contact')}
             className={`mobile-join-link ${isContactActive ? 'active' : ''}`}
-            style={{ textAlign: 'left', background: 'transparent', border: 'none' }}
           >
-            Contact Us →
+            <span>Contact Us</span>
+            <ArrowRight size={15} />
           </button>
         </div>
       )}

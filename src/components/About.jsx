@@ -203,13 +203,8 @@ export default function About({ onNavigate }) {
       {/* ─── 1. HERO SECTION: WHO WE ARE ─────────────────────────────────── */}
       <section className="about-hero-block" id="about-hero">
         <div className="about-hero-hud-frame">
-          <div className="about-hero-grid">
+          <div className="about-hero-grid about-stagger-float">
             <div className="about-hero-content">
-              <div className="about-pill-kicker">
-                <span className="about-pulse-dot" />
-                <span className="about-kicker-text">ACM VIT-AP &middot; COMPUTATIONAL FRONTIER</span>
-              </div>
-
               <h1 className="about-hero-headline">
                 Where Curiosity Meets <span className="cyber-cyan-gradient">Computing.</span>
               </h1>
@@ -286,7 +281,7 @@ export default function About({ onNavigate }) {
 
       {/* ─── 2. OUR STORY ────────────────────────────────────────────────── */}
       <section className="about-section-shell" id="our-story">
-        <div className="about-section-header text-center">
+        <div className="about-section-header text-center about-float-up">
           <div className="about-pill-kicker">
             <Compass size={13} />
             <span>OUR GENESIS & JOURNEY</span>
@@ -299,7 +294,7 @@ export default function About({ onNavigate }) {
           </p>
         </div>
 
-        <div className="about-story-grid">
+        <div className="about-story-grid about-stagger-float">
           <div className="story-card-glass">
             <div className="story-card-icon-wrap">
               <Code2 size={24} className="text-cyan" />
@@ -334,7 +329,7 @@ export default function About({ onNavigate }) {
 
       {/* ─── 3. MISSION AND VISION ───────────────────────────────────────── */}
       <section className="about-section-shell" id="mission-vision">
-        <div className="about-mv-cluster">
+        <div className="about-mv-cluster about-stagger-float">
           {/* Mission Card */}
           <div className="mv-card-glass mission-glass">
             <div className="mv-card-badge">
@@ -377,7 +372,7 @@ export default function About({ onNavigate }) {
 
       {/* ─── 4. WHAT WE DO (VISUALLY DISTINCT CARDS) ─────────────────────── */}
       <section className="about-section-shell" id="what-we-do">
-        <div className="about-section-header text-center">
+        <div className="about-section-header text-center about-float-up">
           <div className="about-pill-kicker">
             <Layers size={13} />
             <span>ACTIVITIES & INITIATIVES</span>
@@ -390,7 +385,7 @@ export default function About({ onNavigate }) {
           </p>
         </div>
 
-        <div className="about-activities-grid">
+        <div className="about-activities-grid about-stagger-float">
           {activities.map((act) => {
             const Icon = act.icon;
             return (
@@ -425,7 +420,7 @@ export default function About({ onNavigate }) {
 
       {/* ─── 5. OUR DEPARTMENTS ──────────────────────────────────────────── */}
       <section className="about-section-shell" id="our-departments">
-        <div className="about-section-header text-center">
+        <div className="about-section-header text-center about-float-up">
           <div className="about-pill-kicker">
             <Users size={13} />
             <span>SPECIALIZED PILLARS</span>
@@ -438,7 +433,7 @@ export default function About({ onNavigate }) {
           </p>
         </div>
 
-        <div className="about-depts-grid">
+        <div className="about-depts-grid about-stagger-float">
           {departments.map((dept) => {
             const DeptIcon = dept.icon;
             return (
@@ -468,7 +463,7 @@ export default function About({ onNavigate }) {
 
       {/* ─── 6. OUR IMPACT AND MILESTONES ────────────────────────────────── */}
       <section className="about-section-shell" id="impact-milestones">
-        <div className="about-section-header text-center">
+        <div className="about-section-header text-center about-float-up">
           <div className="about-pill-kicker">
             <Trophy size={13} />
             <span>PROVEN NUMBERS & MILESTONES</span>
@@ -482,7 +477,7 @@ export default function About({ onNavigate }) {
         </div>
 
         {/* Impact Numbers Strip */}
-        <div className="about-stats-matrix">
+        <div className="about-stats-matrix about-stagger-float">
           <div className="stat-matrix-cell">
             <span className="stat-num-neon">1,200+</span>
             <span className="stat-label-dim">Active Members</span>
@@ -506,7 +501,7 @@ export default function About({ onNavigate }) {
         </div>
 
         {/* Chronological Milestone Timeline */}
-        <div className="about-timeline-track">
+        <div className="about-timeline-track about-stagger-float">
           <div className="timeline-track-rail" />
           {milestones.map((milestone, idx) => (
             <div key={milestone.year} className="timeline-checkpoint-node">
@@ -526,7 +521,7 @@ export default function About({ onNavigate }) {
 
       {/* ─── 7. OUR COMMUNITY & VALUES ───────────────────────────────────── */}
       <section className="about-section-shell" id="values">
-        <div className="about-section-header text-center">
+        <div className="about-section-header text-center about-float-up">
           <div className="about-pill-kicker">
             <HeartHandshake size={13} />
             <span>THE CULTURE WE LIVE BY</span>
@@ -539,7 +534,7 @@ export default function About({ onNavigate }) {
           </p>
         </div>
 
-        <div className="about-values-grid">
+        <div className="about-values-grid about-stagger-float">
           {coreValues.map((val) => {
             const Icon = val.icon;
             return (
@@ -560,7 +555,7 @@ export default function About({ onNavigate }) {
 
       {/* ─── 8. FACULTY GUIDANCE AND LEADERSHIP ───────────────────────────── */}
       <section className="about-section-shell" id="faculty-leadership">
-        <div className="about-section-header text-center">
+        <div className="about-section-header text-center about-float-up">
           <div className="about-pill-kicker">
             <GraduationCap size={13} />
             <span>STEWARDSHIP & GOVERNANCE</span>
@@ -573,7 +568,7 @@ export default function About({ onNavigate }) {
           </p>
         </div>
 
-        <div className="leadership-spotlight-matrix">
+        <div className="leadership-spotlight-matrix about-stagger-float">
           {/* Faculty Coordinator Card */}
           <div className="faculty-spotlight-card">
             <div className="faculty-card-badge-row">
@@ -649,7 +644,7 @@ export default function About({ onNavigate }) {
 
       {/* ─── 9. JOIN THE ACM COMMUNITY ─────────────────── */}
       <section className="about-join-portal-section" id="join-community">
-        <div className="about-join-portal-glass">
+        <div className="about-join-portal-glass about-float-up">
           <div className="join-portal-ambient-light" />
           <div className="join-portal-hud-bar">
             <span className="portal-code">MEMBERSHIP & COMMUNITY</span>

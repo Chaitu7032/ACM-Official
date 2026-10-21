@@ -13,6 +13,7 @@ import About from './components/About.jsx';
 
 import SpaceAtmosphere from './components/SpaceAtmosphere.jsx';
 import CursorEffects from './components/CursorEffects.jsx';
+import SmoothScrollEffects from './components/SmoothScrollEffects.jsx';
 
 // Lazy-load the heavy 3D Space Scene (Globe, Robot, Stars, Bloom)
 const SpaceUniverse = lazy(() => import('./components/SpaceUniverse.jsx'));
@@ -196,6 +197,9 @@ export default function App() {
 
       {/* Cursor effects: spotlight, custom dot & trailing ring, magnetic button physics */}
       <CursorEffects />
+
+      {/* Cinematic Smooth Scroll Progress & Viewport Reveal Engine */}
+      <SmoothScrollEffects activeTab={activeTab} />
 
       {/* Layer 3: 3D Canvas (Rotating Earth, Satellites, 3D NEX Robot, Stars, Bloom) */}
       {hasWebGL && !reducedMotion ? (

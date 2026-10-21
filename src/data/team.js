@@ -25,7 +25,7 @@ export const FACULTY_COORDINATOR = {
 };
 
 // ─── 1] ADMIN TEAM ─────────────────────────────────────────────────────────
-// Tier 1: Top 2 in a row — President & Vice President
+// Tier 1: Core Presidency / Executive Leadership: President, Chief Advisor, Vice President
 export const ADMIN_PRESIDENCY = [
   {
     id: 'president',
@@ -35,6 +35,19 @@ export const ADMIN_PRESIDENCY = [
     photo: '/team-photos/haaris_passport.jpg',
     photoCrop: 'center center',
     quote: 'Leading the computational frontier and uniting innovators across disciplines.',
+    socials: {
+      github: 'https://github.com',
+      linkedin: 'https://linkedin.com',
+    },
+  },
+  {
+    id: 'chief-advisor',
+    name: 'Tushar Kumaran',
+    role: 'Chief Advisor',
+    badge: 'EXECUTIVE ADVISOR',
+    photo: '/team-photos/tushar_passport.jpg',
+    photoCrop: 'center center',
+    quote: 'Guiding visionary computing initiatives and mentoring student leadership.',
     socials: {
       github: 'https://github.com',
       linkedin: 'https://linkedin.com',
@@ -238,6 +251,21 @@ export const DOMAIN_TEAMS = [
         ],
       },
       {
+        title: 'Volunteer Management',
+        variant: 'lead',
+        members: [
+          {
+            id: 'event-volunteer-manager-dept',
+            name: 'R. Sai Ganesh',
+            role: 'Volunteer Manager',
+            photo: '/team-photos/sai_ganesh_passport.jpg',
+            photoCrop: 'center center',
+            quote: 'Mobilizing student volunteer contingents and ensuring smooth operational readiness across events.',
+            socials: { github: 'https://github.com', linkedin: 'https://linkedin.com' },
+          },
+        ],
+      },
+      {
         title: 'Event Leadership',
         variant: 'officer',
         members: [
@@ -257,21 +285,6 @@ export const DOMAIN_TEAMS = [
             photo: '/team-photos/taneesh.jpg',
             photoCrop: 'center 20%',
             quote: 'Coordinating stage schedules, volunteer task tracks, technical logistics, and crowd flow.',
-            socials: { github: 'https://github.com', linkedin: 'https://linkedin.com' },
-          },
-        ],
-      },
-      {
-        title: 'Volunteer Management',
-        variant: 'manager',
-        members: [
-          {
-            id: 'event-volunteer-manager-dept',
-            name: 'R. Sai Ganesh',
-            role: 'Volunteer Manager',
-            photo: '/team-photos/sai_ganesh_passport.jpg',
-            photoCrop: 'center center',
-            quote: 'Mobilizing student volunteer contingents and ensuring smooth operational readiness across events.',
             socials: { github: 'https://github.com', linkedin: 'https://linkedin.com' },
           },
         ],
@@ -297,21 +310,30 @@ export const DOMAIN_TEAMS = [
         socials: { github: 'https://github.com', linkedin: 'https://linkedin.com' },
       },
       {
-        id: 'event-colead-dept',
-        name: 'Taneesh Valupadasu',
-        role: 'Co-Lead',
-        photo: '/team-photos/taneesh.jpg',
-        photoCrop: 'center 20%',
-        quote: 'Coordinating stage schedules, volunteer task tracks, technical logistics, and crowd flow.',
-        socials: { github: 'https://github.com', linkedin: 'https://linkedin.com' },
-      },
-      {
         id: 'event-volunteer-manager-dept',
         name: 'R. Sai Ganesh',
         role: 'Volunteer Manager',
         photo: '/team-photos/sai_ganesh_passport.jpg',
         photoCrop: 'center center',
         quote: 'Mobilizing student volunteer contingents and ensuring smooth operational readiness across events.',
+        socials: { github: 'https://github.com', linkedin: 'https://linkedin.com' },
+      },
+      {
+        id: 'event-lead-dept',
+        name: 'Lakshmi Sree Raghava',
+        role: 'Lead',
+        photo: '/team-photos/TETALA LAKSHMI SREERAGHAVA.jpeg',
+        photoCrop: 'center 15%',
+        quote: 'Leading event architecture, technical stages, timing, and volunteer initiatives.',
+        socials: { github: 'https://github.com', linkedin: 'https://linkedin.com' },
+      },
+      {
+        id: 'event-colead-dept',
+        name: 'Taneesh Valupadasu',
+        role: 'Co-Lead',
+        photo: '/team-photos/taneesh.jpg',
+        photoCrop: 'center 20%',
+        quote: 'Coordinating stage schedules, volunteer task tracks, technical logistics, and crowd flow.',
         socials: { github: 'https://github.com', linkedin: 'https://linkedin.com' },
       },
     ],
