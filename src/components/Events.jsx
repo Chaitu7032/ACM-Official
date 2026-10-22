@@ -1,96 +1,47 @@
-// ---------------------------------------------------------------------------
-// src/components/Events.jsx — Events Section with Interactive Category Filter
-// ---------------------------------------------------------------------------
 import React, { useState } from 'react';
-import { ArrowRight, Calendar, Users, ExternalLink } from 'lucide-react';
-import { EVENT_CATEGORIES, EVENTS_DATA } from '../data/events.js';
+import { ArrowRight } from 'lucide-react';
+import { EVENT_CATEGORIES } from '../data/events.js';
+
+const tiles = [
+  ['treasure-hunt', 'Community', 'COMMUNITY EVENT', 'TREASURE HUNT', 'Decode. Discover. Conquer Together.', '12% 52%'],
+  ['kbc', 'Competitions', 'COMPETITION', 'KBC – KAUN BANEGA CODEPATHI', 'Play. Think. Code. Win.', '48% 46%'],
+  ['ashutosh', 'Tech Talks', 'TECH TALK', 'ASHUTOSH WEBINAR – BEYOND THE CLASSROOM', 'Real Conversations. Deeper Perspectives.', '82% 46%'],
+  ['prompt-battle', 'Competitions', 'COMMUNITY EVENT', 'PROMPT BATTLE', 'Imagine. Prompt. Create.', '16% 80%'],
+  ['technical-workshop', 'Workshops', 'WORKSHOP', 'TECHNICAL WORKSHOP', 'Learn. Build. Grow.', '52% 80%'],
+  ['freshers', 'Community', 'COMMUNITY EVENT', 'FRESHERS MEET AND GREET', 'New Faces. Shared Passions. Stronger Community.', '86% 80%'],
+].map(([id, category, tag, title, subtitle, position]) => ({
+  id,
+  category,
+  tag,
+  title,
+  subtitle,
+  position,
+  image: {
+    'kbc': '/eventspictures/KBC.png',
+    'treasure-hunt': '/eventspictures/treasurehunt.png',
+    'ashutosh': '/eventspictures/ashutosh.png',
+    'prompt-battle': '/eventspictures/promptbattle.png',
+    'technical-workshop': '/eventspictures/technical workshop.jpg',
+    'freshers': '/eventspictures/meetandgreet.png',
+  }[id] || '/assets/panels/08-events-section.jpg',
+}));
+
+function EventTile({ event, featured = false }) {
+  return <article className={`reference-event-tile event-${event.id} ${featured ? 'reference-event-tile--featured' : ''}`}>
+    <img src={event.image} alt="" style={{ objectPosition: event.position }} /><div className="reference-event-shade" />
+    <div className="reference-event-copy"><h3>{event.title}</h3><p>{event.subtitle}</p></div>
+    <button className="reference-event-arrow" aria-label={`View ${event.title}`}><ArrowRight size={22} /></button>
+  </article>;
+}
 
 export default function Events() {
   const [activeCategory, setActiveCategory] = useState('All Events');
-
-  const filteredEvents = activeCategory === 'All Events'
-    ? EVENTS_DATA
-    : EVENTS_DATA.filter((e) => e.category === activeCategory);
-
-  return (
-    <section className="section-full events-section-wrap" id="events">
-      {/* Section Header */}
-      <div className="section-header-cluster">
-        <div className="section-eyebrow-badge">
-          <span>Events & Initiatives</span>
-        </div>
-        <h2 className="section-headline-large">
-          EVENTS THAT CREATE <span className="blue-highlight">CHANGE.</span>
-        </h2>
-        <p className="section-subtext-lede">
-          From workshops to hackathons, we turn ideas into real-world impact.
-        </p>
-      </div>
-
-      {/* Filter Category Pills */}
-      <div className="events-filter-strip" role="tablist" aria-label="Event categories">
-        {EVENT_CATEGORIES.map((cat) => (
-          <button
-            key={cat}
-            role="tab"
-            aria-selected={activeCategory === cat}
-            className={`event-filter-pill ${activeCategory === cat ? 'active' : ''}`}
-            onClick={() => setActiveCategory(cat)}
-          >
-            {cat}
-          </button>
-        ))}
-      </div>
-
-      {/* Grid of Event Glass Cards */}
-      <div className="events-cards-grid">
-        {filteredEvents.map((event) => (
-          <article key={event.id} className="event-glass-card">
-            {/* Image & Date Badge */}
-            <div className="event-card-media-wrap">
-              <img
-                src={event.image}
-                alt={event.title}
-                className="event-card-img"
-                loading="lazy"
-              />
-              <div className="event-card-gradient-overlay" />
-              <div className="event-date-badge">
-                <span>{event.dateBadge}</span>
-              </div>
-              <div className="event-tag-pill">
-                <span>{event.tag}</span>
-              </div>
-            </div>
-
-            {/* Card Content */}
-            <div className="event-card-content">
-              <h3 className="event-title-text">{event.title}</h3>
-              <p className="event-subtitle-text">{event.subtitle}</p>
-              <p className="event-desc-text">{event.description}</p>
-
-              <div className="event-card-footer">
-                <span className="event-attendees-chip">
-                  <Users size={12} />
-                  <span>{event.attendees}</span>
-                </span>
-                <button className="event-view-link" aria-label={`Details for ${event.title}`}>
-                  <span>Details</span>
-                  <ExternalLink size={12} />
-                </button>
-              </div>
-            </div>
-          </article>
-        ))}
-      </div>
-
-      {/* Bottom CTA */}
-      <div className="events-bottom-cta">
-        <a href="#join" className="btn-glass-secondary">
-          <span>View All Events</span>
-          <ArrowRight size={14} />
-        </a>
-      </div>
-    </section>
-  );
+  const filtered = activeCategory === 'All Events' ? tiles : tiles.filter((event) => event.category === activeCategory);
+  const featured = { title: 'ACM QUEST', subtitle: 'A thrilling challenge of knowledge, logic and teamwork inspired by the world of Spider-Man.', tag: '★  FEATURED EVENT', image: '/eventspictures/acmquest.png', position: 'center' };
+  return <section className="section-full events-section-wrap reference-events" id="events">
+    <div className="section-header-cluster reference-events-header"><div className="section-eyebrow-badge"><span>OUR EVENTS</span></div><h2 className="section-headline-large">EVENTS THAT<br />CREATE <span className="blue-highlight">CHANGE.</span></h2><p className="section-subtext-lede">From workshops to hackathons, we turn ideas into real-world impact.<br />Join a community that builds, learns, and innovates together.</p></div>
+    <div className="events-filter-strip reference-event-filters" role="tablist" aria-label="Event categories">{EVENT_CATEGORIES.map((category) => <button key={category} role="tab" aria-selected={activeCategory === category} className={`event-filter-pill ${activeCategory === category ? 'active' : ''}`} onClick={() => setActiveCategory(category)}>{category}</button>)}</div>
+    {activeCategory === 'All Events' && <EventTile featured event={featured} />}
+    <div className="reference-events-grid">{filtered.map((event) => <EventTile key={event.id} event={event} />)}</div>
+  </section>;
 }

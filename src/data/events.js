@@ -56,7 +56,7 @@ export const EVENTS_DATA = [
     title: 'ACM QUEST',
     subtitle: 'Code through the night.',
     description: 'Annual flagship 24-hour hackathon tackling real-world challenges in AI, Web3, and systems architecture.',
-    image: '/assets/panels/08-events-section.jpg',
+    image: '/eventspictures/acmquest.png',
     status: 'Registrations Open',
     attendees: '500+ participants',
   },
