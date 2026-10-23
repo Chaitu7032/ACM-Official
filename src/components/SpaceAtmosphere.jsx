@@ -7,8 +7,12 @@
 // 4. Glow rings pulse (breathing neon platform rings)
 // 5. Floating dust particles (glowing specks drifting upward + foreground blur)
 // 6. Vignette and film grain (noise overlay ~4% opacity)
+// Mobile: reduced star count, no dust canvas (too expensive on GPU-limited devices)
 // ---------------------------------------------------------------------------
 import React, { useEffect, useRef } from 'react';
+
+const isMobile = () =>
+  typeof window !== 'undefined' && window.matchMedia('(max-width: 900px)').matches;
 
 export default function SpaceAtmosphere() {
   const canvasRef = useRef(null);
@@ -30,8 +34,9 @@ export default function SpaceAtmosphere() {
     };
     window.addEventListener('resize', handleResize);
 
-    // Star data
-    const starCount = Math.floor((width * height) / 3200);
+    // Star data — use much fewer stars on mobile to prevent lag
+    const mobile = isMobile();
+    const starCount = Math.floor((width * height) / (mobile ? 14000 : 3200));
     const stars = Array.from({ length: starCount }, () => ({
       x: Math.random() * width,
       y: Math.random() * height * 0.75, // mainly in the upper space viewport
@@ -73,8 +78,9 @@ export default function SpaceAtmosphere() {
     };
   }, []);
 
-  // Floating Dust specks drifting upward
+  // Floating Dust specks drifting upward — skip entirely on mobile (GPU-expensive)
   useEffect(() => {
+    if (isMobile()) return;
     const canvas = dustCanvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
@@ -142,13 +148,13 @@ export default function SpaceAtmosphere() {
       {/* Canvas for twinkling stars and drifting nebula */}
       <canvas ref={canvasRef} className="atmosphere-canvas" />
 
-      {/* Floating dust particles */}
-      <canvas ref={dustCanvasRef} className="dust-canvas" />
+      {/* Floating dust particles — hidden on mobile via CSS, canvas skipped too */}
+      <canvas ref={dustCanvasRef} className="dust-canvas atmosphere-desktop-only" />
 
-      {/* Shooting stars elements with staggered animations */}
-      <div className="shooting-star star-1" />
-      <div className="shooting-star star-2" />
-      <div className="shooting-star star-3" />
+      {/* Shooting stars elements — hidden on mobile via CSS */}
+      <div className="shooting-star star-1 atmosphere-desktop-only" />
+      <div className="shooting-star star-2 atmosphere-desktop-only" />
+      <div className="shooting-star star-3 atmosphere-desktop-only" />
 
       {/* Platform glow rings breathing pulse mask */}
       <div className="platform-glow-rings-pulse" />

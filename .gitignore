@@ -59,5 +59,10 @@ coverage/
 .temp/
 tmp/
 
-# Raw media / source photos containing unstripped metadata or reg numbers
+# Raw source directories not used by the web app
 public/team members/
+*.psd
+*.raw
+*.cr2
+
+

@@ -2301,8 +2301,8 @@ ol {
 
 .faculty-photo-outer-frame {
   position: relative;
-  width: 215px;
-  height: 275px;
+  width: clamp(120px, 28vw, 215px);
+  height: clamp(160px, 36vw, 275px);
   flex-shrink: 0;
   border-radius: 16px;
   overflow: hidden;
@@ -3313,7 +3313,7 @@ ol {
   position: relative;
   z-index: 5;
   display: grid;
-  grid-template-columns: minmax(320px, .82fr) minmax(520px, 1.18fr);
+  grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr);
   align-items: stretch;
   gap: clamp(2.5rem, 7vw, 7rem);
   padding: clamp(2.6rem, 5vw, 4.5rem) clamp(2rem, 5vw, 4.5rem);
@@ -6093,4 +6093,711 @@ ol {
     animation: none !important;
     filter: none !important;
   }
-}
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════ */
+/* COMPREHENSIVE MOBILE RESPONSIVE FIXES (ALL SCREEN SIZES)                   */
+/* All rules are scoped to max-width so desktop is completely untouched.       */
+/* ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Helper: hide desktop-only heavy atmosphere decorations on mobile */
+@media (max-width: 900px) {
+  .atmosphere-desktop-only {
+    display: none !important;
+  }
+}
+
+/* ── 900px and below ──────────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  /* Hero section */
+  .hero-universe {
+    padding: 5.5rem 1.1rem 3rem 1.1rem;
+    min-height: 100svh;
+    align-items: flex-start;
+    padding-top: 6rem;
+  }
+  .hero-left-sidebar {
+    display: none !important;
+  }
+  .hero-content-layer {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    width: 100%;
+  }
+  .hero-typography-block {
+    max-width: 100%;
+  }
+  .hero-3d-visual-zone {
+    min-height: 0;
+    display: none;
+  }
+  .hero-chapter-eyebrow {
+    margin-bottom: 0.75rem;
+  }
+  .hero-cta-cluster {
+    flex-direction: column;
+    width: 100%;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+  .btn-primary-glow,
+  .btn-glass-secondary {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+    padding: 0.85rem 1.5rem;
+  }
+
+  /* About network grid */
+  .about-network-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  /* Events grid */
+  .events-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Footer */
+  .site-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+    padding-inline: 0.5rem;
+  }
+  .footer-links-side {
+    align-items: flex-start;
+  }
+  .footer-nav-col {
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+  }
+
+  /* Contact grid — force single column */
+  .contact-content-grid {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+    padding: 1.75rem 1.1rem;
+  }
+  .contact-info-col,
+  .contact-form-col {
+    max-width: 100%;
+    margin-left: 0;
+  }
+
+  /* Faculty showcase */
+  .faculty-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
+  .faculty-profile-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 1.5rem 1.1rem;
+  }
+  .faculty-details-block {
+    align-items: center;
+  }
+  .faculty-role-pill {
+    align-self: center;
+  }
+  .faculty-message-content-split {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  /* Disable heavy backdrop-filter on mobile for performance */
+  .story-card-glass,
+  .mv-card-glass,
+  .activity-glass-card,
+  .dept-capsule-card,
+  .value-capsule-glass,
+  .faculty-spotlight-card,
+  .exec-preview-card,
+  .about-join-portal-glass,
+  .about-hero-hud-frame,
+  .checkpoint-card-glass,
+  .stat-matrix-cell {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  /* Team tabs — scrollable strip */
+  .team-filter-tabs-wrapper {
+    overflow-x: auto;
+    max-width: 100%;
+    justify-content: flex-start;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding: 0.25rem 0 0.6rem;
+    margin-bottom: 1.75rem;
+  }
+  .team-filter-tabs-wrapper::-webkit-scrollbar { display: none; }
+  .team-filter-tabs-strip { flex-shrink: 0; }
+}
+
+/* ── 768px and below ──────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  /* Page container */
+  .about-futuristic-page {
+    padding: 1.25rem 0.85rem 3.5rem;
+    gap: 3.5rem;
+  }
+
+  /* Hero */
+  .hero-universe {
+    padding: 5.5rem 0.85rem 2.5rem;
+  }
+  .hero-main-title {
+    font-size: clamp(2rem, 10vw, 2.8rem);
+    letter-spacing: -0.03em;
+  }
+  .hero-description-lede {
+    font-size: 0.9rem;
+    max-width: 100%;
+  }
+
+  /* About hero */
+  .about-hero-hud-frame {
+    padding: 1.35rem 1rem;
+    border-radius: 16px;
+  }
+  .about-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
+  .about-hero-headline {
+    font-size: clamp(1.55rem, 7vw, 2.2rem);
+  }
+  .about-hero-paragraph {
+    font-size: 0.88rem;
+  }
+  .about-hero-actions-row {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.75rem;
+  }
+  .about-btn-primary,
+  .about-btn-secondary {
+    width: 100%;
+    justify-content: center;
+  }
+  .about-logo-stage-glass {
+    max-width: 280px;
+    padding: 1.5rem 1.25rem;
+  }
+  .logo-emblem-disc {
+    width: min(62vw, 220px);
+    height: min(62vw, 220px);
+  }
+  .logo-aura-ring.ring-outer {
+    width: 185px;
+    height: 185px;
+    margin-top: -92.5px;
+    margin-left: -92.5px;
+  }
+  .logo-aura-ring.ring-mid {
+    width: 148px;
+    height: 148px;
+    margin-top: -74px;
+    margin-left: -74px;
+  }
+  .stage-title { font-size: 0.92rem; }
+  .stage-subtitle { font-size: 0.78rem; }
+
+  /* Section headers */
+  .about-section-header {
+    margin-bottom: 1.75rem;
+  }
+  .about-section-title {
+    font-size: clamp(1.5rem, 6.5vw, 2rem);
+  }
+  .about-section-subtitle {
+    font-size: 0.88rem;
+  }
+  .about-pill-kicker {
+    font-size: 0.65rem;
+  }
+
+  /* All about grids → single column */
+  .about-story-grid,
+  .about-activities-grid,
+  .about-depts-grid,
+  .about-values-grid,
+  .about-mv-cluster {
+    grid-template-columns: 1fr;
+    gap: 1.1rem;
+  }
+
+  /* Stats matrix — 2 cols on tablet, 1 col on phone (see 480px below) */
+  .about-stats-matrix {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
+
+  /* Timeline — single column stacked */
+  .about-timeline-track {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .about-timeline-track .timeline-track-rail {
+    display: none;
+  }
+  .checkpoint-card-glass {
+    min-height: auto;
+  }
+
+  /* Leadership matrix → single column */
+  .leadership-spotlight-matrix {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .faculty-spotlight-card,
+  .exec-preview-card {
+    padding: 1.5rem 1.1rem;
+  }
+  .faculty-card-profile-split {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+  }
+  .faculty-avatar-circle {
+    margin: 0 auto;
+    width: 88px;
+    height: 88px;
+  }
+
+  /* Join portal */
+  .about-join-portal-glass {
+    padding: 2rem 1.1rem;
+    border-radius: 18px;
+  }
+  .join-portal-headline {
+    font-size: clamp(1.6rem, 7vw, 2.4rem);
+  }
+  .join-portal-paragraph {
+    font-size: 0.9rem;
+  }
+  .join-portal-buttons-grid {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.75rem;
+  }
+  .join-portal-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 0.85rem 1.35rem;
+  }
+
+  /* Team grids */
+  .team-grid-2col.executive-tier {
+    max-width: 100%;
+    grid-template-columns: 1fr;
+  }
+  .team-grid-2col.managers-tier > .team-glass-member-card {
+    flex: 1 1 100%;
+    width: 100%;
+    max-width: 100%;
+  }
+  .department-selection-grid {
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+  }
+  .dept-selection-card:nth-child(7):last-child {
+    grid-column: auto;
+    max-width: 100%;
+  }
+
+  /* Events filter */
+  .events-filter-strip {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    gap: 0.4rem;
+    padding-bottom: 0.5rem;
+  }
+  .events-filter-strip::-webkit-scrollbar { display: none; }
+  .event-filter-pill {
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+  .events-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 1.1rem;
+  }
+
+  /* Gallery */
+  .gallery-grid { grid-template-columns: 1fr; }
+  .gallery-archive-strip {
+    grid-template-columns: repeat(7, 160px);
+  }
+
+  /* Section full padding */
+  .section-full {
+    padding: 5rem 0.85rem 3rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .section-headline-large {
+    font-size: clamp(1.65rem, 7.5vw, 2.4rem);
+  }
+
+  /* Spotlight card */
+  .spotlight-card-inner {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+  }
+  .spotlight-info-column {
+    align-items: center;
+    text-align: center;
+  }
+  .spotlight-avatar {
+    margin: 0 auto;
+  }
+  .member-socials-cluster {
+    justify-content: center;
+  }
+
+  /* MV card padding */
+  .mv-card-glass {
+    padding: 2rem 1.35rem;
+  }
+
+  /* Contact */
+  .contact-section-wrapper {
+    padding: 0.65rem 0.65rem 2.5rem;
+  }
+  .contact-content-grid {
+    padding: 1.35rem 0.9rem;
+    gap: 1.5rem;
+  }
+  .contact-form-card {
+    padding: 1.25rem 1rem;
+    border-radius: 14px;
+  }
+  .form-grid-pair {
+    grid-template-columns: 1fr;
+  }
+  .contact-main-frame {
+    border-radius: 14px;
+    margin-bottom: 2rem;
+  }
+
+  /* Floating nav */
+  .floating-nav-wrapper {
+    top: 0.65rem;
+    padding: 0 0.65rem;
+  }
+}
+
+/* ── 640px and below ──────────────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  /* Hero */
+  .hero-universe {
+    padding: 5rem 0.75rem 2rem;
+  }
+  .hero-main-title {
+    font-size: clamp(1.9rem, 11vw, 2.5rem);
+  }
+
+  /* Stats matrix → 1 col */
+  .about-stats-matrix {
+    grid-template-columns: 1fr;
+  }
+
+  /* Gallery archive strip */
+  .gallery-archive-strip {
+    grid-template-columns: repeat(7, 150px);
+  }
+  .gallery-memory-tree {
+    min-height: 380px;
+    transform: scale(0.9);
+    transform-origin: top center;
+    margin-bottom: -3rem;
+  }
+  .gallery-category-node {
+    min-width: 100px;
+    font-size: 0.62rem;
+    padding: 0.38rem 0.45rem;
+  }
+  .gallery-memory-photo {
+    width: 72px;
+  }
+
+  /* Event list/photo grids */
+  .event-list-grid,
+  .event-photo-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Contact */
+  .journey-card-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.6rem;
+  }
+  .journey-vertical-sep {
+    display: none;
+  }
+
+  /* About join portal */
+  .join-portal-hud-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.4rem;
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  /* Department selection */
+  .dept-card-body {
+    margin-bottom: 0.85rem;
+  }
+  .dept-card-title {
+    font-size: 1rem;
+  }
+
+  /* Team glass card */
+  .team-grid-2col,
+  .team-grid-3col {
+    grid-template-columns: 1fr;
+    max-width: 100%;
+  }
+  .team-glass-member-card {
+    padding: 1.35rem 1rem;
+  }
+}
+
+/* ── 480px and below ──────────────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  /* Tiny phone safety */
+  html, body, #root {
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+
+  /* Hero title */
+  .hero-main-title {
+    font-size: clamp(1.75rem, 12vw, 2.2rem);
+  }
+  .hero-universe {
+    padding: 4.5rem 0.65rem 2rem;
+  }
+
+  /* About page */
+  .about-futuristic-page {
+    padding: 1rem 0.65rem 2.5rem;
+    gap: 2.75rem;
+  }
+  .about-hero-hud-frame {
+    padding: 1.1rem 0.75rem;
+  }
+  .about-hero-headline {
+    font-size: clamp(1.35rem, 8.5vw, 1.8rem);
+  }
+  .about-subheadline-motto {
+    font-size: 0.78rem;
+    gap: 0.3rem;
+  }
+  .about-hero-paragraph {
+    font-size: 0.82rem;
+  }
+  .about-logo-stage-glass {
+    max-width: 240px;
+    padding: 1.25rem 1rem;
+  }
+  .logo-emblem-disc {
+    width: min(58vw, 195px);
+    height: min(58vw, 195px);
+  }
+
+  /* Navbar */
+  .nav-brand-title {
+    font-size: 0.68rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 9rem;
+  }
+  .nav-brand-sub {
+    display: none;
+  }
+  .nav-logo-diamond-wrap {
+    width: 26px;
+    height: 26px;
+  }
+  .mobile-menu-toggle {
+    width: 36px;
+    height: 36px;
+  }
+
+  /* Section */
+  .section-full {
+    padding: 4.5rem 0.65rem 2.5rem;
+  }
+  .section-headline-large {
+    font-size: clamp(1.45rem, 9vw, 2rem);
+  }
+
+  /* About section title */
+  .about-section-title {
+    font-size: clamp(1.25rem, 7.5vw, 1.75rem);
+  }
+  .about-section-subtitle {
+    font-size: 0.83rem;
+  }
+
+  /* MV card */
+  .mv-card-glass {
+    padding: 1.5rem 1rem;
+  }
+  .mv-card-heading {
+    font-size: 1.65rem;
+  }
+  .mv-card-text {
+    font-size: 0.9rem;
+  }
+  .mv-quote-decor {
+    font-size: 5rem;
+    right: 1rem;
+    top: 1rem;
+  }
+
+  /* Stat cells */
+  .stat-matrix-cell {
+    padding: 1.5rem 1rem;
+  }
+  .stat-num-neon {
+    font-size: clamp(1.8rem, 9vw, 2.4rem);
+  }
+  .stat-label-dim {
+    font-size: 0.88rem;
+  }
+  .stat-subdetail {
+    font-size: 0.72rem;
+  }
+
+  /* Checkpoint cards */
+  .checkpoint-card-glass {
+    padding: 1.2rem 1rem;
+  }
+  .checkpoint-year-pill {
+    font-size: 0.72rem;
+    padding: 0.28rem 0.7rem;
+  }
+
+  /* Activity cards */
+  .activity-glass-card {
+    padding: 1.5rem 1.1rem;
+  }
+
+  /* Dept capsule */
+  .dept-capsule-card {
+    padding: 1.25rem 1rem;
+  }
+  .faculty-spotlight-card,
+  .exec-preview-card {
+    padding: 1.1rem 0.85rem;
+  }
+  .faculty-avatar-circle {
+    width: 74px;
+    height: 74px;
+  }
+  .faculty-title-name {
+    font-size: 1.15rem;
+  }
+
+  /* Join portal */
+  .about-join-portal-glass {
+    padding: 1.5rem 0.85rem;
+  }
+  .join-portal-headline {
+    font-size: clamp(1.4rem, 8vw, 2rem);
+  }
+  .join-portal-paragraph {
+    font-size: 0.84rem;
+  }
+  .join-portal-btn {
+    font-size: 0.84rem;
+    padding: 0.75rem 1rem;
+  }
+
+  /* Contact */
+  .contact-content-grid {
+    padding: 1.1rem 0.75rem;
+    gap: 1.25rem;
+  }
+  .contact-form-card {
+    padding: 1rem 0.75rem;
+  }
+  .contact-headline {
+    font-size: clamp(1.4rem, 8vw, 2rem);
+  }
+  .contact-section-wrapper {
+    padding: 0.5rem 0.5rem 2rem;
+  }
+
+  /* Gallery */
+  .gallery-memory-archive {
+    padding-inline: 0.75rem;
+  }
+
+  /* Smooth scroll effects: keep blur animations lightweight */
+  .about-float-up {
+    filter: none !important;
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .about-stagger-float > * {
+    filter: none !important;
+    transition: opacity 0.65s ease, transform 0.65s ease,
+                box-shadow 0.25s ease, border-color 0.25s ease;
+  }
+
+  /* Footer */
+  .site-footer {
+    padding-inline: 0.5rem;
+  }
+  .footer-nav-col {
+    gap: 0.4rem 0.85rem;
+  }
+}
+
+/* ── 360px and below (very small phones) ─────────────────────────────────── */
+@media (max-width: 360px) {
+  .about-futuristic-page {
+    padding: 1rem 0.5rem 2rem;
+  }
+  .hero-main-title {
+    font-size: clamp(1.6rem, 13vw, 2rem);
+  }
+  .about-hero-headline {
+    font-size: clamp(1.2rem, 9vw, 1.6rem);
+  }
+  .nav-brand-group {
+    max-width: calc(100% - 48px);
+  }
+  .about-join-portal-glass {
+    padding: 1.25rem 0.65rem;
+  }
+  .join-portal-btn {
+    font-size: 0.78rem;
+    padding: 0.65rem 0.85rem;
+  }
+  .about-section-title {
+    font-size: clamp(1.1rem, 8vw, 1.5rem);
+  }
+  .mv-card-glass {
+    padding: 1.25rem 0.85rem;
+  }
+  .contact-content-grid {
+    padding: 0.85rem 0.65rem;
+  }
+}
+
