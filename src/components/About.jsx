@@ -682,7 +682,7 @@ export default function About({ onNavigate }) {
               </button>
 
               <a
-                href="https://www.linkedin.com/company/acm-vit-ap"
+                href="https://www.linkedin.com/company/acm-student-chapter-vit-ap/"
                 target="_blank"
                 rel="noreferrer noopener"
                 className="join-portal-btn outline-portal"

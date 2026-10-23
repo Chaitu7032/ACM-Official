@@ -32,7 +32,7 @@ export default function Hero({ onNavigate }) {
       <div className="hero-left-sidebar" aria-label="Social links and scroll">
         <div className="hero-social-strip">
           <a
-            href="https://linkedin.com"
+            href="https://www.linkedin.com/company/acm-student-chapter-vit-ap/"
             target="_blank"
             rel="noreferrer"
             className="hero-social-icon-btn"
@@ -41,7 +41,7 @@ export default function Hero({ onNavigate }) {
             <LinkedinIcon />
           </a>
           <a
-            href="https://instagram.com"
+            href="https://www.instagram.com/acm_vitap?cplk=OG9hYWFjdWJuOTRx"
             target="_blank"
             rel="noreferrer"
             className="hero-social-icon-btn"
@@ -50,7 +50,7 @@ export default function Hero({ onNavigate }) {
             <InstagramIcon />
           </a>
           <a
-            href="https://youtube.com"
+            href="https://www.youtube.com/@vit-apacmstudentchapterclu6341"
             target="_blank"
             rel="noreferrer"
             className="hero-social-icon-btn"
@@ -97,7 +97,7 @@ export default function Hero({ onNavigate }) {
               <ArrowRight size={16} className="btn-icon-arrow" />
             </button>
             <a
-              href="https://youtube.com"
+              href="https://www.youtube.com/@vit-apacmstudentchapterclu6341"
               target="_blank"
               rel="noreferrer"
               className="btn-glass-secondary"
