@@ -156,9 +156,7 @@ ol {
   background-repeat: no-repeat;
   pointer-events: none;
   will-change: transform;
-  transition: transform 0.12s cubic-bezier(0.16, 1, 0.3, 1), background-image 0.5s ease-in-out;
-  /* Filter the image itself to quiet the scene and tone down bright cyan floor rings */
-  filter: brightness(0.75) saturate(0.85) contrast(1.05);
+  transition: background-image 0.5s ease-in-out;
 }
 
 /* Teams Page Dedicated Cinematic Cosmic Background */
@@ -1913,7 +1911,7 @@ ol {
 /* ─── Premium Human-Crafted Team Member Cards ─────────────────────────────── */
 .team-glass-member-card {
   position: relative;
-  background: rgba(8, 22, 50, 0.72);
+  background: rgba(8, 22, 50, 0.82);
   border: 1px solid rgba(56, 114, 180, 0.3);
   border-radius: 20px;
   padding: 1.85rem 1.6rem 1.6rem 1.6rem;
@@ -1921,8 +1919,8 @@ ol {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   box-shadow: 
     0 10px 30px rgba(0, 0, 0, 0.5),
     inset 0 1px 0 rgba(255, 255, 255, 0.08);
@@ -1932,7 +1930,6 @@ ol {
               background 0.25s ease;
   width: 100%;
   overflow: hidden;
-  will-change: transform, box-shadow;
 }
 
 .team-glass-member-card:hover {
@@ -2283,8 +2280,8 @@ ol {
   border: 1px solid rgba(0, 212, 255, 0.45);
   border-radius: 22px;
   padding: 2.2rem 2.4rem;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   box-shadow: 
     0 20px 48px rgba(0, 0, 0, 0.65),
     0 0 40px rgba(0, 212, 255, 0.2),
@@ -3099,7 +3096,7 @@ ol {
 .event-photo-grid img { display: block; width: 100%; aspect-ratio: 1.35; object-fit: cover; border: 1px solid rgba(0,212,255,.35); border-radius: 12px; box-shadow: 0 10px 24px rgba(0,0,0,.35); opacity: 0; animation: photoReveal .8s cubic-bezier(.16,1,.3,1) forwards; animation-delay: calc(var(--photo-index) * 90ms); transition: transform .45s, box-shadow .45s, border-color .35s; }
 .event-photo-grid img:hover { transform: translateY(-6px) scale(1.015); border-color: #00eaff; box-shadow: 0 20px 35px rgba(0,0,0,.5), 0 0 24px rgba(0,212,255,.22); }
 @keyframes archiveCardIn { to { opacity: 1; transform: translateY(0) scale(1); } }
-@keyframes photoReveal { from { opacity: 0; transform: translateY(22px) scale(.97); filter: blur(5px); } to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); } }
+@keyframes photoReveal { from { opacity: 0; transform: translateY(18px) scale(.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
 @media (prefers-reduced-motion: reduce) { .event-list-card, .event-photo-grid img { animation: none; opacity: 1; transform: none; } .event-list-card::after { display: none; } }
 
 /* Cinematic people archive treatment */
@@ -3117,7 +3114,7 @@ ol {
 .member-name-heading { position: relative; z-index: 1; text-shadow: 0 2px 18px rgba(0,0,0,.45); }
 .dept-selection-card { animation: teamCardReveal .7s cubic-bezier(.16,1,.3,1) both; }
 .dept-selection-card:nth-child(2) { animation-delay: .06s; }.dept-selection-card:nth-child(3) { animation-delay: .12s; }.dept-selection-card:nth-child(4) { animation-delay: .18s; }.dept-selection-card:nth-child(5) { animation-delay: .24s; }.dept-selection-card:nth-child(6) { animation-delay: .3s; }.dept-selection-card:nth-child(7) { animation-delay: .36s; }
-@keyframes teamCardReveal { from { opacity: 0; transform: translateY(22px) scale(.98); filter: blur(4px); } to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); } }
+@keyframes teamCardReveal { from { opacity: 0; transform: translateY(18px) scale(.99); } to { opacity: 1; transform: translateY(0) scale(1); } }
 @media (prefers-reduced-motion: reduce) { .team-glass-member-card, .dept-selection-card { animation: none; opacity: 1; } .team-glass-member-card:hover .member-avatar-placeholder, .team-glass-member-card:hover .member-profile-img { transform: none; } }
 
 /* Final mobile pass — scoped to small screens so desktop composition is unchanged. */
@@ -3563,7 +3560,8 @@ ol {
 .contact-form-card {
   position: relative;
   background: rgba(3, 11, 26, 0.94);
-  backdrop-filter: blur(28px);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border: 1px solid rgba(0, 212, 255, 0.28);
   border-radius: 18px;
   padding: clamp(1.6rem, 3vw, 2.25rem) clamp(1.5rem, 3vw, 2.5rem) 1.75rem;
@@ -4384,44 +4382,47 @@ ol {
   height: 280px;
   border-radius: 50%;
   background: radial-gradient(ellipse at 50% 95%, rgba(0, 212, 255, 0.22) 0%, rgba(30, 144, 255, 0.08) 35%, transparent 65%);
-  filter: blur(28px);
   animation: ringPulse 5s ease-in-out infinite alternate;
   pointer-events: none;
 }
 
 @keyframes ringPulse {
   0% {
-    opacity: 0.2;
-    transform: translateX(-50%) scale(0.97);
+    opacity: 0.22;
   }
 
   100% {
-    opacity: 0.55;
-    transform: translateX(-50%) scale(1.03);
+    opacity: 0.52;
   }
 }
 
-/* Film grain & noise overlay at ~4% opacity */
+/* Film grain & noise overlay at ~3.5% opacity */
 .film-grain-overlay {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  opacity: 0.04;
+  opacity: 0.035;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
   background-repeat: repeat;
-  mix-blend-mode: overlay;
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════ */
 /* 3. CURSOR EFFECTS                                                          */
 /* ═══════════════════════════════════════════════════════════════════════════ */
-/* Spotlight: subtle soft cyan glow with decreased opacity */
 .cursor-spotlight {
   position: fixed;
-  inset: 0;
+  top: 0;
+  left: 0;
+  width: 460px;
+  height: 460px;
+  margin-top: -230px;
+  margin-left: -230px;
+  border-radius: 50%;
   pointer-events: none;
   z-index: 3;
-  background: radial-gradient(420px circle at var(--mx, -500px) var(--my, -500px), rgba(0, 212, 255, 0.05) 0%, rgba(30, 144, 255, 0.015) 35%, transparent 70%);
+  background: radial-gradient(circle, rgba(0, 212, 255, 0.05) 0%, rgba(30, 144, 255, 0.015) 35%, transparent 70%);
+  transform: translate3d(-1000px, -1000px, 0);
+  will-change: transform;
   transition: opacity 0.3s ease;
 }
 
@@ -4462,15 +4463,10 @@ ol {
   0% {
     opacity: 0;
     transform: translateY(18px) scale(0.97);
-    filter: blur(4px);
-  }
-  60% {
-    filter: blur(0px);
   }
   100% {
     opacity: 1;
     transform: translateY(0) scale(1);
-    filter: blur(0px);
   }
 }
 
@@ -4976,7 +4972,8 @@ ol {
   border-radius: 16px;
   padding: 2.25rem 1.85rem;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   transition: all 0.35s ease;
   position: relative;
 }
@@ -5026,7 +5023,8 @@ ol {
   border: 1px solid rgba(0, 212, 255, 0.28);
   border-radius: 20px;
   padding: 3rem 2.5rem;
-  backdrop-filter: blur(16px);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   overflow: hidden;
   box-shadow: 0 16px 45px rgba(0, 0, 0, 0.6);
   transition: all 0.35s ease;
@@ -5110,7 +5108,6 @@ ol {
   width: 250px;
   height: 250px;
   border-radius: 50%;
-  filter: blur(80px);
   pointer-events: none;
   opacity: 0.35;
 }
@@ -5118,13 +5115,13 @@ ol {
 .mv-glow-orb.cyan-orb {
   bottom: -60px;
   right: -60px;
-  background: #00d4ff;
+  background: radial-gradient(circle, rgba(0, 212, 255, 0.45) 0%, rgba(0, 212, 255, 0.12) 40%, transparent 70%);
 }
 
 .mv-glow-orb.purple-orb {
   bottom: -60px;
   right: -60px;
-  background: #8b5cf6;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.45) 0%, rgba(139, 92, 246, 0.12) 40%, transparent 70%);
 }
 
 /* ─── 4. WHAT WE DO (VISUALLY DISTINCT CARDS) ────────────────────────────── */
@@ -5141,7 +5138,8 @@ ol {
   border-radius: 16px;
   padding: 2.25rem 1.85rem;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(14px);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
   flex-direction: column;
@@ -5252,7 +5250,8 @@ ol {
   border: 1px solid rgba(0, 212, 255, 0.2);
   border-radius: 14px;
   padding: 1.6rem 1.4rem;
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
@@ -5324,7 +5323,8 @@ ol {
   border-radius: 16px;
   padding: 2.2rem 1.6rem;
   text-align: center;
-  backdrop-filter: blur(14px);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   transition: all 0.3s ease;
 }
@@ -5418,7 +5418,8 @@ ol {
   border-radius: 14px;
   padding: 1.6rem 1.35rem;
   box-shadow: 0 10px 28px rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   min-height: 190px;
 }
 
@@ -5458,7 +5459,8 @@ ol {
   border: 1px solid rgba(0, 212, 255, 0.2);
   border-radius: 14px;
   padding: 1.85rem 1.45rem;
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   box-shadow: 0 10px 28px rgba(0, 0, 0, 0.5);
   transition: all 0.3s ease;
 }
@@ -5521,7 +5523,8 @@ ol {
   border: 1px solid rgba(0, 212, 255, 0.25);
   border-radius: 18px;
   padding: 2.25rem;
-  backdrop-filter: blur(14px);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   box-shadow: 0 12px 35px rgba(0, 0, 0, 0.55);
 }
 
@@ -5690,7 +5693,8 @@ ol {
   border-radius: 24px;
   padding: 3.5rem 3rem;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7), 0 0 40px rgba(0, 212, 255, 0.15);
-  backdrop-filter: blur(20px);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   overflow: hidden;
   text-align: center;
 }
@@ -5703,7 +5707,6 @@ ol {
   width: 500px;
   height: 300px;
   background: radial-gradient(circle, rgba(0, 212, 255, 0.25) 0%, transparent 70%);
-  filter: blur(50px);
   pointer-events: none;
 }
 
@@ -5965,53 +5968,53 @@ ol {
 /* Base Scroll Reveal Animation */
 .scroll-reveal {
   opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, transform;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .scroll-reveal.is-in-view {
   opacity: 1;
   transform: translateY(0);
+  will-change: auto;
 }
 
 /* Subtle Scale Scroll Reveal Variant */
 .scroll-reveal-scale {
   opacity: 0;
-  transform: translateY(24px) scale(0.97);
-  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, transform;
+  transform: translateY(20px) scale(0.98);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .scroll-reveal-scale.is-in-view {
   opacity: 1;
   transform: translateY(0) scale(1);
+  will-change: auto;
 }
 
 /* Stagger for Child Cards in Grids & Clusters */
 .stagger-child-reveal > * {
   opacity: 0;
-  transform: translateY(22px);
-  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, transform;
+  transform: translateY(20px);
+  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .stagger-child-reveal.is-in-view > * {
   opacity: 1;
   transform: translateY(0);
+  will-change: auto;
 }
 
 .stagger-child-reveal.is-in-view > *:nth-child(1) { transition-delay: 0.04s; }
-.stagger-child-reveal.is-in-view > *:nth-child(2) { transition-delay: 0.09s; }
-.stagger-child-reveal.is-in-view > *:nth-child(3) { transition-delay: 0.14s; }
-.stagger-child-reveal.is-in-view > *:nth-child(4) { transition-delay: 0.19s; }
-.stagger-child-reveal.is-in-view > *:nth-child(5) { transition-delay: 0.24s; }
-.stagger-child-reveal.is-in-view > *:nth-child(6) { transition-delay: 0.29s; }
-.stagger-child-reveal.is-in-view > *:nth-child(7) { transition-delay: 0.34s; }
-.stagger-child-reveal.is-in-view > *:nth-child(8) { transition-delay: 0.39s; }
+.stagger-child-reveal.is-in-view > *:nth-child(2) { transition-delay: 0.08s; }
+.stagger-child-reveal.is-in-view > *:nth-child(3) { transition-delay: 0.12s; }
+.stagger-child-reveal.is-in-view > *:nth-child(4) { transition-delay: 0.16s; }
+.stagger-child-reveal.is-in-view > *:nth-child(5) { transition-delay: 0.20s; }
+.stagger-child-reveal.is-in-view > *:nth-child(6) { transition-delay: 0.24s; }
+.stagger-child-reveal.is-in-view > *:nth-child(7) { transition-delay: 0.28s; }
+.stagger-child-reveal.is-in-view > *:nth-child(8) { transition-delay: 0.32s; }
 
 /* Flagship Ultra-Smooth Glass Card Hover Elevation */
 .event-glass-card,
@@ -6031,47 +6034,41 @@ ol {
 /* Section headers and standalone blocks floating up smoothly while scrolling */
 .about-float-up {
   opacity: 0;
-  transform: translate3d(0, 48px, 0) scale(0.975);
-  filter: blur(4px);
-  transition: opacity 0.92s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.92s cubic-bezier(0.16, 1, 0.3, 1),
-              filter 0.92s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, transform, filter;
+  transform: translate3d(0, 32px, 0);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .about-float-up.is-in-view {
   opacity: 1;
-  transform: translate3d(0, 0, 0) scale(1);
-  filter: blur(0px);
+  transform: translate3d(0, 0, 0);
+  will-change: auto;
 }
 
 /* Staggered card floating waves across all grids on the About page */
 .about-stagger-float > * {
   opacity: 0;
-  transform: translate3d(0, 44px, 0) scale(0.965);
-  filter: blur(4px);
-  transition: opacity 0.88s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.88s cubic-bezier(0.16, 1, 0.3, 1),
-              filter 0.88s cubic-bezier(0.16, 1, 0.3, 1),
+  transform: translate3d(0, 28px, 0);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1),
               box-shadow 0.32s ease,
               border-color 0.32s ease;
-  will-change: opacity, transform, filter;
 }
 
 .about-stagger-float.is-in-view > * {
   opacity: 1;
-  transform: translate3d(0, 0, 0) scale(1);
-  filter: blur(0px);
+  transform: translate3d(0, 0, 0);
+  will-change: auto;
 }
 
 .about-stagger-float.is-in-view > *:nth-child(1) { transition-delay: 0.05s; }
-.about-stagger-float.is-in-view > *:nth-child(2) { transition-delay: 0.12s; }
-.about-stagger-float.is-in-view > *:nth-child(3) { transition-delay: 0.19s; }
-.about-stagger-float.is-in-view > *:nth-child(4) { transition-delay: 0.26s; }
-.about-stagger-float.is-in-view > *:nth-child(5) { transition-delay: 0.33s; }
-.about-stagger-float.is-in-view > *:nth-child(6) { transition-delay: 0.40s; }
-.about-stagger-float.is-in-view > *:nth-child(7) { transition-delay: 0.47s; }
-.about-stagger-float.is-in-view > *:nth-child(8) { transition-delay: 0.54s; }
+.about-stagger-float.is-in-view > *:nth-child(2) { transition-delay: 0.10s; }
+.about-stagger-float.is-in-view > *:nth-child(3) { transition-delay: 0.15s; }
+.about-stagger-float.is-in-view > *:nth-child(4) { transition-delay: 0.20s; }
+.about-stagger-float.is-in-view > *:nth-child(5) { transition-delay: 0.25s; }
+.about-stagger-float.is-in-view > *:nth-child(6) { transition-delay: 0.30s; }
+.about-stagger-float.is-in-view > *:nth-child(7) { transition-delay: 0.35s; }
+.about-stagger-float.is-in-view > *:nth-child(8) { transition-delay: 0.40s; }
 
 /* Subtle floating lift for cards on hover once revealed */
 .about-stagger-float.is-in-view > *:hover {

@@ -1,6 +1,7 @@
 // ---------------------------------------------------------------------------
 // src/components/SmoothScrollEffects.jsx
-// Flagship Cinematic Smooth Scroll Engine & Viewport Reveal Observer
+// High-performance smooth scroll progress and intersection reveal engine.
+// Avoids synchronous getBoundingClientRect layout thrashing during tab shifts.
 // ---------------------------------------------------------------------------
 import React, { useEffect, useRef } from 'react';
 
@@ -23,14 +24,12 @@ export default function SmoothScrollEffects({ activeTab }) {
       if (photonRef.current) {
         photonRef.current.style.opacity = progress > 0.005 ? '1' : '0';
       }
+      animationFrameId = null;
     };
 
     const handleScroll = () => {
       if (animationFrameId) return;
-      animationFrameId = requestAnimationFrame(() => {
-        updateScrollProgress();
-        animationFrameId = null;
-      });
+      animationFrameId = requestAnimationFrame(updateScrollProgress);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -44,7 +43,7 @@ export default function SmoothScrollEffects({ activeTab }) {
     };
   }, [activeTab]);
 
-  // 2. Cinematic Intersection Observer for Flagship Scroll Reveals
+  // 2. Pure Intersection Observer for Flagship Scroll Reveals (zero layout thrashing)
   useEffect(() => {
     // If user prefers reduced motion, reveal everything immediately
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -102,10 +101,25 @@ export default function SmoothScrollEffects({ activeTab }) {
     let observer = null;
 
     const setupObserver = () => {
-      const elementsToObserve = new Set();
+      observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-in-view');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        {
+          threshold: 0.05,
+          rootMargin: '40px 0px -20px 0px',
+        }
+      );
 
       revealSelectors.forEach((sel) => {
-        document.querySelectorAll(sel).forEach((el) => {
+        const matches = document.querySelectorAll(sel);
+        for (let i = 0; i < matches.length; i++) {
+          const el = matches[i];
           if (
             !el.classList.contains('scroll-reveal') &&
             !el.classList.contains('stagger-child-reveal') &&
@@ -118,39 +132,12 @@ export default function SmoothScrollEffects({ activeTab }) {
               el.classList.add('scroll-reveal');
             }
           }
-          elementsToObserve.add(el);
-        });
-      });
-
-      observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('is-in-view');
-              // Free up observer once element is revealed
-              observer.unobserve(entry.target);
-            }
-          });
-        },
-        {
-          threshold: 0.06,
-          rootMargin: '0px 0px -40px 0px',
-        }
-      );
-
-      elementsToObserve.forEach((el) => {
-        const rect = el.getBoundingClientRect();
-        // If element is already within or above the viewport, reveal immediately
-        if (rect.top < window.innerHeight && rect.bottom > 0) {
-          el.classList.add('is-in-view');
-        } else {
           observer.observe(el);
         }
       });
     };
 
-    // Small delay to ensure React has flushed DOM for the activeTab
-    const timeoutId = setTimeout(setupObserver, 60);
+    const timeoutId = setTimeout(setupObserver, 50);
 
     return () => {
       clearTimeout(timeoutId);

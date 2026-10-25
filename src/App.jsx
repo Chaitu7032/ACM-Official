@@ -1,7 +1,7 @@
 // ---------------------------------------------------------------------------
 // src/App.jsx — Master ACM VIT-AP Computational Universe Application
 // ---------------------------------------------------------------------------
-import React, { useState, useEffect, Suspense, lazy } from 'react';
+import React, { useState, useEffect, useRef, Suspense, lazy } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { ArrowRight, ChevronRight, Globe as GlobeIcon } from 'lucide-react';
 import Loader from './components/Loader.jsx';
@@ -98,23 +98,23 @@ function AboutSection() {
 function GallerySection() {
   const [activeMemory, setActiveMemory] = useState(null);
   const tiles = [
-    { label: 'ACM QUEST', sub: 'SPIDER-MAN BRAND NEW DAY', image: '/eventspictures/acmquest.png' },
-    { label: 'TREASURE HUNT', sub: 'DECODE. DISCOVER. CONQUER.', image: '/eventspictures/treasurehunt.png' },
-    { label: 'KBC', sub: 'KAUN BANEGA CODEPATHI', image: '/eventspictures/KBC.png' },
-    { label: 'ASHUTOSH WEBINAR', sub: 'BEYOND THE CLASSROOM', image: '/eventspictures/ashutosh.png' },
-    { label: 'PROMPT BATTLE', sub: 'IMAGINE. PROMPT. CREATE.', image: '/eventspictures/promptbattle.png' },
-    { label: 'TECHNICAL WORKSHOP', sub: 'LEARN. BUILD. GROW.', image: '/eventspictures/technical workshop.jpg' },
-    { label: 'FRESHERS MEET AND GREET', sub: 'NEW FACES. SHARED PASSIONS.', image: '/eventspictures/meetandgreet.png' },
+    { label: 'ACM QUEST', sub: 'SPIDER-MAN BRAND NEW DAY', image: '/eventspictures/acmquest.webp' },
+    { label: 'TREASURE HUNT', sub: 'DECODE. DISCOVER. CONQUER.', image: '/eventspictures/treasurehunt.webp' },
+    { label: 'KBC', sub: 'KAUN BANEGA CODEPATHI', image: '/eventspictures/KBC.webp' },
+    { label: 'ASHUTOSH WEBINAR', sub: 'BEYOND THE CLASSROOM', image: '/eventspictures/ashutosh.webp' },
+    { label: 'PROMPT BATTLE', sub: 'IMAGINE. PROMPT. CREATE.', image: '/eventspictures/promptbattle.webp' },
+    { label: 'TECHNICAL WORKSHOP', sub: 'LEARN. BUILD. GROW.', image: '/eventspictures/technical workshop.webp' },
+    { label: 'FRESHERS MEET AND GREET', sub: 'NEW FACES. SHARED PASSIONS.', image: '/eventspictures/meetandgreet.webp' },
   ];
 
   const memories = [
-    { label: 'ACM QUEST', category: 'COMPETITIONS', sub: 'SPIDER-MAN BRAND NEW DAY', image: '/eventspictures/acmquest.png', alt: 'ACM Quest Spider-Man Brand New Day event artwork' },
-    { label: 'TREASURE HUNT', category: 'COMMUNITY', sub: 'DECODE. DISCOVER. CONQUER.', image: '/eventspictures/treasurehunt.png', alt: 'Treasure Hunt event artwork' },
-    { label: 'KBC', category: 'COMPETITIONS', sub: 'KAUN BANEGA CODEPATHI', image: '/eventspictures/KBC.png', alt: 'KBC Kaun Banega Codepathi event artwork' },
-    { label: 'ASHUTOSH WEBINAR', category: 'INNOVATION', sub: 'BEYOND THE CLASSROOM', image: '/eventspictures/ashutosh.png', alt: 'Ashutosh webinar event artwork' },
-    { label: 'PROMPT BATTLE', category: 'INNOVATION', sub: 'IMAGINE. PROMPT. CREATE.', image: '/eventspictures/promptbattle.png', alt: 'Prompt Battle event artwork' },
-    { label: 'TECHNICAL WORKSHOP', category: 'WORKSHOPS', sub: 'LEARN. BUILD. GROW.', image: '/eventspictures/technical workshop.jpg', alt: 'Technical workshop event photograph' },
-    { label: 'FRESHERS MEET AND GREET', category: 'COMMUNITY', sub: 'NEW FACES. SHARED PASSIONS.', image: '/eventspictures/meetandgreet.png', alt: 'Freshers Meet and Greet event artwork' },
+    { label: 'ACM QUEST', category: 'COMPETITIONS', sub: 'SPIDER-MAN BRAND NEW DAY', image: '/eventspictures/acmquest.webp', alt: 'ACM Quest Spider-Man Brand New Day event artwork' },
+    { label: 'TREASURE HUNT', category: 'COMMUNITY', sub: 'DECODE. DISCOVER. CONQUER.', image: '/eventspictures/treasurehunt.webp', alt: 'Treasure Hunt event artwork' },
+    { label: 'KBC', category: 'COMPETITIONS', sub: 'KAUN BANEGA CODEPATHI', image: '/eventspictures/KBC.webp', alt: 'KBC Kaun Banega Codepathi event artwork' },
+    { label: 'ASHUTOSH WEBINAR', category: 'INNOVATION', sub: 'BEYOND THE CLASSROOM', image: '/eventspictures/ashutosh.webp', alt: 'Ashutosh webinar event artwork' },
+    { label: 'PROMPT BATTLE', category: 'INNOVATION', sub: 'IMAGINE. PROMPT. CREATE.', image: '/eventspictures/promptbattle.webp', alt: 'Prompt Battle event artwork' },
+    { label: 'TECHNICAL WORKSHOP', category: 'WORKSHOPS', sub: 'LEARN. BUILD. GROW.', image: '/eventspictures/technical workshop.webp', alt: 'Technical workshop event photograph' },
+    { label: 'FRESHERS MEET AND GREET', category: 'COMMUNITY', sub: 'NEW FACES. SHARED PASSIONS.', image: '/eventspictures/meetandgreet.webp', alt: 'Freshers Meet and Greet event artwork' },
   ];
 
   return (
@@ -201,7 +201,7 @@ function EventGallery() {
     {!selected ? <>
       <div className="event-gallery-heading"><div className="section-eyebrow-badge"><span>EVENT ARCHIVE</span></div><h2 className="section-headline-large">MOMENTS THAT <span className="blue-highlight">INSPIRE.</span></h2><p className="section-subtext-lede">Choose an event to explore its photos and relive the experience.</p></div>
       <div className="event-list-grid">{events.map((event, index) => <button className="event-list-card" style={{ '--event-index': index }} key={event.label} onClick={() => setSelected(event)}><img src={event.image} alt="" loading="lazy" decoding="async" /><span className="event-list-card-copy"><small>{event.category}</small><strong>{event.label}</strong><span>View photos <ArrowRight size={15} /></span></span></button>)}</div>
-    </> : <div className="event-detail"><button className="event-detail-back" onClick={() => setSelected(null)}>← All events</button><div className="event-detail-heading"><div><span className="gallery-memory-category">{selected.category}</span><h2>{selected.label}</h2></div><p>Event memories from ACM VIT-AP</p></div><div className="event-photo-grid">{selected.photos.map((photo, index) => <img style={{ '--photo-index': index }} key={photo} src={photo} alt={`${selected.label} event memory`} loading="lazy" />)}</div></div>}
+    </> : <div className="event-detail"><button className="event-detail-back" onClick={() => setSelected(null)}>← All events</button><div className="event-detail-heading"><div><span className="gallery-memory-category">{selected.category}</span><h2>{selected.label}</h2></div><p>Event memories from ACM VIT-AP</p></div><div className="event-photo-grid">{selected.photos.map((photo, index) => <img style={{ '--photo-index': index }} key={photo} src={photo} alt={`${selected.label} event memory`} loading="lazy" decoding="async" />)}</div></div>}
   </section>;
 }
 
@@ -211,9 +211,9 @@ import Contact from './components/Contact.jsx';
 export default function App() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [activeTab, setActiveTab] = useState('home');
-  const [pointer, setPointer] = useState({ x: 0, y: 0 });
   const [hasWebGL] = useState(() => detectWebGL());
   const reducedMotion = usePrefersReducedMotion();
+  const hangarBgRef = useRef(null);
 
   // Listen to hash changes for browser forward/back buttons
   useEffect(() => {
@@ -235,28 +235,55 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  // Parallax pointer tracking
-  const handlePointerMove = (e) => {
+  // High-performance smooth parallax: directly updates GPU transform via rAF (zero React re-renders)
+  useEffect(() => {
     if (reducedMotion) return;
-    setPointer({
-      x: (e.clientX / window.innerWidth - 0.5) * 2,
-      y: (e.clientY / window.innerHeight - 0.5) * 2,
-    });
-  };
+
+    let targetX = 0;
+    let targetY = 0;
+    let currentX = 0;
+    let currentY = 0;
+    let rafId = null;
+
+    const onPointerMove = (e) => {
+      targetX = ((e.clientX / window.innerWidth) - 0.5) * -12;
+      targetY = ((e.clientY / window.innerHeight) - 0.5) * -8;
+      if (!rafId) {
+        rafId = requestAnimationFrame(updateParallax);
+      }
+    };
+
+    const updateParallax = () => {
+      currentX += (targetX - currentX) * 0.12;
+      currentY += (targetY - currentY) * 0.12;
+
+      if (hangarBgRef.current) {
+        hangarBgRef.current.style.transform = `translate3d(${currentX.toFixed(2)}px, ${currentY.toFixed(2)}px, 0) scale(1.04)`;
+      }
+
+      if (Math.abs(targetX - currentX) > 0.05 || Math.abs(targetY - currentY) > 0.05) {
+        rafId = requestAnimationFrame(updateParallax);
+      } else {
+        rafId = null;
+      }
+    };
+
+    window.addEventListener('pointermove', onPointerMove, { passive: true });
+    return () => {
+      window.removeEventListener('pointermove', onPointerMove);
+      if (rafId) cancelAnimationFrame(rafId);
+    };
+  }, [reducedMotion]);
 
   return (
-    <div className="app-root" onPointerMove={handlePointerMove}>
+    <div className="app-root">
       {/* Intro sequence loader */}
       <Loader onComplete={() => setIsLoaded(true)} />
 
       {/* Layer 1: Atmospheric Background Plate with Parallax & Page Adaptability */}
       <div
+        ref={hangarBgRef}
         className={`hangar-bg-layer ${activeTab === 'teams' ? 'teams-page-bg' : ''}`}
-        style={{
-          transform: reducedMotion
-            ? 'none'
-            : `translate(${pointer.x * -12}px, ${pointer.y * -8}px) scale(1.04)`,
-        }}
         aria-hidden="true"
       />
 
@@ -277,8 +304,14 @@ export default function App() {
         <div className="three-scene-container" aria-hidden="true">
           <Canvas
             camera={{ position: [0, 0, 10], fov: 35 }}
-            dpr={[1, 1.5]}
-            gl={{ alpha: true }}
+            dpr={[1, 1.25]}
+            frameloop={activeTab === 'teams' ? 'never' : 'always'}
+            gl={{
+              alpha: true,
+              powerPreference: 'high-performance',
+              antialias: false,
+              stencil: false,
+            }}
             style={{ background: 'transparent' }}
           >
             <Suspense fallback={null}>

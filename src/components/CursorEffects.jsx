@@ -1,14 +1,15 @@
 // ---------------------------------------------------------------------------
 // src/components/CursorEffects.jsx
-// Implements:
-// 1. Subtle soft cyan radial glow following cursor with decreased opacity
-// 2. Custom cursor: sleek small blue glowing dot (big trailing ring removed)
-// 3. Magnetic buttons: 'Explore Our World' and primary CTAs gently pull toward cursor
+// High-performance cursor effects:
+// 1. Hardware-accelerated GPU spotlight (no CSS custom property mutation on <html>)
+// 2. Custom dot cursor positioned via translate3d in rAF
+// 3. Magnetic CTAs with cached geometry (zero layout thrashing on mousemove)
 // ---------------------------------------------------------------------------
 import React, { useEffect, useRef } from 'react';
 
 export default function CursorEffects() {
   const dotRef = useRef(null);
+  const spotlightRef = useRef(null);
 
   useEffect(() => {
     // Disable custom cursor and magnetic physics on touch devices
@@ -18,34 +19,47 @@ export default function CursorEffects() {
 
     let mouseX = -100;
     let mouseY = -100;
+    let rafId = null;
+
+    const updatePositions = () => {
+      if (dotRef.current) {
+        dotRef.current.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
+      }
+      if (spotlightRef.current) {
+        spotlightRef.current.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
+      }
+      rafId = null;
+    };
 
     const onPointerMove = (e) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
-      document.documentElement.style.setProperty('--mx', `${e.clientX}px`);
-      document.documentElement.style.setProperty('--my', `${e.clientY}px`);
-
-      if (dotRef.current) {
-        dotRef.current.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
+      if (!rafId) {
+        rafId = requestAnimationFrame(updatePositions);
       }
     };
 
     window.addEventListener('pointermove', onPointerMove, { passive: true });
 
-    // Magnetic effect on magnetic buttons
+    // Magnetic effect with cached bounding rect (avoids layout thrashing)
     const magneticElements = document.querySelectorAll('.magnetic-btn, .btn-primary-glow');
     const cleanups = [];
 
     magneticElements.forEach((btn) => {
-      const onMouseMove = (e) => {
+      let centerX = 0;
+      let centerY = 0;
+
+      const onMouseEnter = () => {
         const rect = btn.getBoundingClientRect();
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
+        centerX = rect.left + rect.width / 2;
+        centerY = rect.top + rect.height / 2;
+      };
+
+      const onMouseMove = (e) => {
         const deltaX = e.clientX - centerX;
         const deltaY = e.clientY - centerY;
         const distance = Math.hypot(deltaX, deltaY);
 
-        // Pull when cursor is within 90px
         if (distance < 90) {
           const strength = 0.35;
           btn.style.transform = `translate3d(${deltaX * strength}px, ${deltaY * strength}px, 0)`;
@@ -56,10 +70,12 @@ export default function CursorEffects() {
         btn.style.transform = `translate3d(0, 0, 0)`;
       };
 
-      btn.addEventListener('mousemove', onMouseMove);
-      btn.addEventListener('mouseleave', onMouseLeave);
+      btn.addEventListener('mouseenter', onMouseEnter, { passive: true });
+      btn.addEventListener('mousemove', onMouseMove, { passive: true });
+      btn.addEventListener('mouseleave', onMouseLeave, { passive: true });
 
       cleanups.push(() => {
+        btn.removeEventListener('mouseenter', onMouseEnter);
         btn.removeEventListener('mousemove', onMouseMove);
         btn.removeEventListener('mouseleave', onMouseLeave);
       });
@@ -67,16 +83,17 @@ export default function CursorEffects() {
 
     return () => {
       window.removeEventListener('pointermove', onPointerMove);
+      if (rafId) cancelAnimationFrame(rafId);
       cleanups.forEach((c) => c());
     };
   }, []);
 
   return (
     <>
-      {/* Soft subtle cyan radial spotlight illuminating the scene with low opacity */}
-      <div className="cursor-spotlight" aria-hidden="true" />
+      {/* Soft subtle cyan radial spotlight moved via GPU translate3d */}
+      <div ref={spotlightRef} className="cursor-spotlight" aria-hidden="true" />
 
-      {/* Small blue dot cursor only */}
+      {/* Small blue dot cursor */}
       <div ref={dotRef} className="cursor-dot" aria-hidden="true" />
     </>
   );
