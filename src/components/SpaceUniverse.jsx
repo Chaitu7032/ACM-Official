@@ -6,20 +6,20 @@
 import React from 'react';
 import { Stars } from '@react-three/drei';
 
-export default function SpaceUniverse() {
+export default function SpaceUniverse({ lowPower = false }) {
   return (
     <>
       <ambientLight intensity={0.4} />
 
       {/* High-fidelity 3D starfield rendered directly to canvas without postprocessing overhead */}
       <Stars
-        radius={90}
-        depth={45}
-        count={2400}
-        factor={3.6}
+        radius={lowPower ? 72 : 90}
+        depth={lowPower ? 34 : 45}
+        count={lowPower ? 900 : 2400}
+        factor={lowPower ? 2.8 : 3.6}
         saturation={0.35}
         fade
-        speed={0.6}
+        speed={lowPower ? 0.28 : 0.6}
       />
     </>
   );

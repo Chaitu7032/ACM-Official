@@ -21,9 +21,9 @@ export default function SpaceAtmosphere({ activeTab = 'home' }) {
     const ctx = canvas.getContext('2d', { alpha: true });
     if (!ctx) return;
 
-    let animationFrameId;
+    let animationFrameId = null;
     let isVisible = true;
-    let isScrolledPast = false;
+    let isScrolledPast = window.scrollY > window.innerHeight * 1.4;
 
     let width = (canvas.width = window.innerWidth);
     let height = (canvas.height = window.innerHeight);
@@ -36,10 +36,22 @@ export default function SpaceAtmosphere({ activeTab = 'home' }) {
     const handleScroll = () => {
       // Pause drawing when scrolled deep down past the top section
       isScrolledPast = window.scrollY > window.innerHeight * 1.4;
+      if (isScrolledPast && animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+        animationFrameId = null;
+      } else if (!isScrolledPast && isVisible && activeTab === 'home' && !animationFrameId) {
+        animationFrameId = requestAnimationFrame(render);
+      }
     };
 
     const handleVisibility = () => {
       isVisible = !document.hidden;
+      if (!isVisible && animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+        animationFrameId = null;
+      } else if (isVisible && !isScrolledPast && activeTab === 'home' && !animationFrameId) {
+        animationFrameId = requestAnimationFrame(render);
+      }
     };
 
     window.addEventListener('resize', handleResize, { passive: true });
@@ -48,7 +60,8 @@ export default function SpaceAtmosphere({ activeTab = 'home' }) {
 
     // Balanced star count for high visual impact without fill-rate saturation
     const mobile = isMobile();
-    const starCount = mobile ? 50 : 140;
+    const lowPower = mobile || (navigator.hardwareConcurrency || 4) <= 4 || (navigator.deviceMemory || 4) <= 4;
+    const starCount = lowPower ? 36 : 140;
     const stars = Array.from({ length: starCount }, () => ({
       x: Math.random() * width,
       y: Math.random() * height * 0.75,
@@ -56,7 +69,7 @@ export default function SpaceAtmosphere({ activeTab = 'home' }) {
       baseAlpha: Math.random() * 0.45 + 0.25,
       pulseSpeed: Math.random() * 0.025 + 0.01,
       phase: Math.random() * Math.PI * 2,
-      isGlow: Math.random() > 0.65,
+      isGlow: !lowPower && Math.random() > 0.65,
     }));
 
     let time = 0;
@@ -86,10 +99,17 @@ export default function SpaceAtmosphere({ activeTab = 'home' }) {
         }
       }
 
-      if (activeTab === 'home') animationFrameId = requestAnimationFrame(render);
+      animationFrameId = null;
+      if (activeTab === 'home' && isVisible && !isScrolledPast) {
+        animationFrameId = requestAnimationFrame(render);
+      }
     };
 
-    render();
+    if (activeTab === 'home' && isVisible && !isScrolledPast) {
+      animationFrameId = requestAnimationFrame(render);
+    } else {
+      render();
+    }
 
     return () => {
       window.removeEventListener('resize', handleResize);
@@ -107,9 +127,9 @@ export default function SpaceAtmosphere({ activeTab = 'home' }) {
     const ctx = canvas.getContext('2d', { alpha: true });
     if (!ctx) return;
 
-    let animationFrameId;
+    let animationFrameId = null;
     let isVisible = true;
-    let isScrolledPast = false;
+    let isScrolledPast = window.scrollY > window.innerHeight * 1.4;
 
     let width = (canvas.width = window.innerWidth);
     let height = (canvas.height = window.innerHeight);
@@ -121,10 +141,22 @@ export default function SpaceAtmosphere({ activeTab = 'home' }) {
 
     const handleScroll = () => {
       isScrolledPast = window.scrollY > window.innerHeight * 1.4;
+      if (isScrolledPast && animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+        animationFrameId = null;
+      } else if (!isScrolledPast && isVisible && activeTab === 'home' && !animationFrameId) {
+        animationFrameId = requestAnimationFrame(renderDust);
+      }
     };
 
     const handleVisibility = () => {
       isVisible = !document.hidden;
+      if (!isVisible && animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+        animationFrameId = null;
+      } else if (isVisible && !isScrolledPast && activeTab === 'home' && !animationFrameId) {
+        animationFrameId = requestAnimationFrame(renderDust);
+      }
     };
 
     window.addEventListener('resize', handleResize, { passive: true });
@@ -172,10 +204,17 @@ export default function SpaceAtmosphere({ activeTab = 'home' }) {
         }
       }
 
-      if (activeTab === 'home') animationFrameId = requestAnimationFrame(renderDust);
+      animationFrameId = null;
+      if (activeTab === 'home' && isVisible && !isScrolledPast) {
+        animationFrameId = requestAnimationFrame(renderDust);
+      }
     };
 
-    renderDust();
+    if (activeTab === 'home' && isVisible && !isScrolledPast) {
+      animationFrameId = requestAnimationFrame(renderDust);
+    } else {
+      renderDust();
+    }
 
     return () => {
       window.removeEventListener('resize', handleResize);

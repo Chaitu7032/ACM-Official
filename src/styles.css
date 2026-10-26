@@ -4646,6 +4646,21 @@ a:focus-visible {
   opacity: .82;
 }
 
+.performance-lite .nav-island-capsule,
+.performance-lite .btn-glass-secondary,
+.performance-lite .chip,
+.performance-lite .nex-bubble,
+.performance-lite [class*="glass"] {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.performance-lite .three-scene-container canvas,
+.performance-lite .atmosphere-canvas,
+.performance-lite .dust-canvas {
+  image-rendering: auto;
+}
+
 @media (max-width: 900px) {
   .film-grain-overlay,
   .shooting-star {

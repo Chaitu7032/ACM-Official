@@ -317,14 +317,14 @@ export default function App() {
             frameloop={activeTab === 'home' ? 'always' : 'demand'}
             gl={{
               alpha: true,
-              powerPreference: 'high-performance',
+              powerPreference: performanceProfile.lowPower ? 'low-power' : 'high-performance',
               antialias: false,
               stencil: false,
             }}
             style={{ background: 'transparent' }}
           >
             <Suspense fallback={null}>
-              <SpaceUniverse />
+              <SpaceUniverse lowPower={performanceProfile.lowPower} />
             </Suspense>
           </Canvas>
         </div>
