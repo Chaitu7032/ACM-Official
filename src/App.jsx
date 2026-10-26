@@ -28,6 +28,14 @@ function detectWebGL() {
   }
 }
 
+function getPerformanceProfile() {
+  if (typeof window === 'undefined') return { lowPower: false };
+  const coarsePointer = window.matchMedia('(pointer: coarse)').matches;
+  const cores = navigator.hardwareConcurrency || 4;
+  const memory = navigator.deviceMemory || 4;
+  return { lowPower: coarsePointer || cores <= 4 || memory <= 4 };
+}
+
 // ─── Reduced Motion Hook ────────────────────────────────────────────────────
 function usePrefersReducedMotion() {
   const [reduced, setReduced] = useState(false);
@@ -212,6 +220,7 @@ export default function App() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [activeTab, setActiveTab] = useState('home');
   const [hasWebGL] = useState(() => detectWebGL());
+  const [performanceProfile] = useState(getPerformanceProfile);
   const reducedMotion = usePrefersReducedMotion();
   const hangarBgRef = useRef(null);
 
@@ -237,7 +246,7 @@ export default function App() {
 
   // High-performance smooth parallax: directly updates GPU transform via rAF (zero React re-renders)
   useEffect(() => {
-    if (reducedMotion) return;
+    if (reducedMotion || window.matchMedia('(pointer: coarse)').matches) return;
 
     let targetX = 0;
     let targetY = 0;
@@ -276,7 +285,7 @@ export default function App() {
   }, [reducedMotion]);
 
   return (
-    <div className="app-root">
+    <div className={`app-root ${performanceProfile.lowPower ? 'performance-lite' : ''}`}>
       {/* Intro sequence loader */}
       <Loader onComplete={() => setIsLoaded(true)} />
 
@@ -288,7 +297,7 @@ export default function App() {
       />
 
       {/* Layer 1.5: Rich Space Atmosphere (twinkling stars, shooting stars, nebula drift, glow pulse, dust, noise) */}
-      <SpaceAtmosphere />
+      <SpaceAtmosphere activeTab={activeTab} />
 
       {/* Layer 2: Dark Vignette & Left typography contrast overlay */}
       <div className="hangar-dark-vignette" aria-hidden="true" />
@@ -304,8 +313,8 @@ export default function App() {
         <div className="three-scene-container" aria-hidden="true">
           <Canvas
             camera={{ position: [0, 0, 10], fov: 35 }}
-            dpr={[1, 1.25]}
-            frameloop={activeTab === 'teams' ? 'never' : 'always'}
+            dpr={performanceProfile.lowPower ? [0.75, 1] : [1, 1.25]}
+            frameloop={activeTab === 'home' ? 'always' : 'demand'}
             gl={{
               alpha: true,
               powerPreference: 'high-performance',

@@ -258,7 +258,7 @@ export default function About({ onNavigate }) {
                 <div className="logo-floating-wrapper">
                   <div className="logo-emblem-disc">
                     <img
-                      src="/assets/Acm logo.jpeg"
+                      src="/assets/acm-logo-transparent.png"
                       alt="ACM Student Chapter VIT-AP University Official Emblem"
                       className="acm-official-floating-logo"
                     />

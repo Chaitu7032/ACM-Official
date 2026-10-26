@@ -10,7 +10,7 @@ import React, { useEffect, useRef } from 'react';
 const isMobile = () =>
   typeof window !== 'undefined' && window.matchMedia('(max-width: 900px)').matches;
 
-export default function SpaceAtmosphere() {
+export default function SpaceAtmosphere({ activeTab = 'home' }) {
   const canvasRef = useRef(null);
   const dustCanvasRef = useRef(null);
 
@@ -86,7 +86,7 @@ export default function SpaceAtmosphere() {
         }
       }
 
-      animationFrameId = requestAnimationFrame(render);
+      if (activeTab === 'home') animationFrameId = requestAnimationFrame(render);
     };
 
     render();
@@ -97,7 +97,7 @@ export default function SpaceAtmosphere() {
       document.removeEventListener('visibilitychange', handleVisibility);
       cancelAnimationFrame(animationFrameId);
     };
-  }, []);
+  }, [activeTab]);
 
   // Floating Dust specks (skip on mobile, ultra-lightweight GPU 2D on desktop)
   useEffect(() => {
@@ -172,7 +172,7 @@ export default function SpaceAtmosphere() {
         }
       }
 
-      animationFrameId = requestAnimationFrame(renderDust);
+      if (activeTab === 'home') animationFrameId = requestAnimationFrame(renderDust);
     };
 
     renderDust();
@@ -183,10 +183,10 @@ export default function SpaceAtmosphere() {
       document.removeEventListener('visibilitychange', handleVisibility);
       cancelAnimationFrame(animationFrameId);
     };
-  }, []);
+  }, [activeTab]);
 
   return (
-    <div className="space-atmosphere-wrapper" aria-hidden="true">
+    <div className={`space-atmosphere-wrapper ${activeTab === 'home' ? '' : 'space-atmosphere--static'}`} aria-hidden="true">
       {/* Canvas for twinkling stars */}
       <canvas ref={canvasRef} className="atmosphere-canvas" />
 

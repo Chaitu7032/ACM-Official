@@ -244,6 +244,64 @@ function DepartmentCard({ dept, onSelect, index = 0 }) {
   );
 }
 
+function EventTeamNode({ member }) {
+  const [imgFailed, setImgFailed] = useState(false);
+  const initials = member.name.split(' ').filter(Boolean).map((part) => part[0]).join('').slice(0, 2).toUpperCase();
+
+  return (
+    <article className="event-team-node">
+      <div className="event-team-node-avatar">
+        {member.photo && !imgFailed ? (
+          <img
+            src={member.photo}
+            alt={member.name}
+            style={{
+              ...(member.photoCrop ? { objectPosition: member.photoCrop } : {}),
+              ...(member.photoZoom ? { transform: `scale(${member.photoZoom})` } : {}),
+            }}
+            onError={() => setImgFailed(true)}
+          />
+        ) : <span>{initials}</span>}
+      </div>
+      <div className="event-team-node-copy">
+        <span className="event-team-node-role">{member.role}</span>
+        <h4>{member.name}</h4>
+        <div className="event-team-node-socials" aria-label={`${member.name}'s social profiles`}>
+          <a href={member.socials?.linkedin || '#'} target="_blank" rel="noreferrer noopener" aria-label={`${member.name}'s LinkedIn`}><LinkedinIcon size={13} /></a>
+          <a href={member.socials?.github || '#'} target="_blank" rel="noreferrer noopener" aria-label={`${member.name}'s GitHub`}><GithubIcon size={13} /></a>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+function EventManagementDiagram({ department }) {
+  const manager = department.hierarchyTiers[0].members[0];
+  const volunteerLead = department.hierarchyTiers[1].members[0];
+  const eventMembers = department.hierarchyTiers[2].members;
+  const volunteerMember = department.hierarchyTiers[1].members[1];
+
+  return (
+    <div className="event-management-diagram" aria-label="Event management team structure">
+      <div className="event-diagram-manager">
+        <EventTeamNode member={manager} />
+      </div>
+      <div className="event-diagram-trunk" aria-hidden="true" />
+      <div className="event-diagram-branches" aria-hidden="true"><span /><span /></div>
+      <div className="event-diagram-branch-grid">
+        <section className="event-team-branch event-team-branch--events">
+          <header><CalendarCheck size={20} /><div><h3>Event Management</h3><p>Planning and executing flagship events, speaker talks, workshops and student engagements.</p></div></header>
+          <div className="event-team-node-grid">{eventMembers.map((member) => <EventTeamNode key={member.id} member={member} />)}</div>
+        </section>
+        <section className="event-team-branch event-team-branch--volunteers">
+          <header><Users size={20} /><div><h3>Volunteer Management</h3><p>Coordinating volunteers, community outreach, and on-ground event support.</p></div></header>
+          <div className="event-team-node-grid">{[volunteerLead, volunteerMember].map((member) => <EventTeamNode key={member.id} member={member} />)}</div>
+        </section>
+      </div>
+    </div>
+  );
+}
+
 export default function Team() {
   const [activeTab, setActiveTab] = useState('domains');
   // activeDepartmentId is null when showing the department selection grid; set to dept.id when drilled inside
@@ -539,7 +597,9 @@ export default function Team() {
               </div>
 
               {/* Department Team Members Display */}
-              <div className="dept-hierarchy-wrapper">
+              {selectedDepartment.id === 'events' ? (
+                <EventManagementDiagram department={selectedDepartment} />
+              ) : <div className="dept-hierarchy-wrapper">
                 {/* EXPLICIT HIERARCHY (e.g. Event Management Team or defined hierarchy tiers) */}
                 {selectedDepartment.hierarchyTiers ? (
                   selectedDepartment.hierarchyTiers.map((tier, idx) => (
@@ -684,7 +744,7 @@ export default function Team() {
                     )}
                   </>
                 )}
-              </div>
+              </div>}
             </div>
           )}
         </div>

@@ -43,19 +43,15 @@ export default function Loader({ onComplete }) {
       <div className="intro-scene-box">
         {/* Pulsing energy portal glow */}
         <div className="intro-portal-glow" />
-        <div className="intro-portal-ring ring-1" />
-        <div className="intro-portal-ring ring-2" />
 
-        {/* Diamond frame with electric energy tracing */}
-        <div className="intro-diamond-frame">
-          <svg className="intro-lightning-svg" viewBox="0 0 240 240">
-            <polygon points="120,15 225,120 120,225 15,120" className="trace-rhombus-bg" />
-            <polygon points="120,15 225,120 120,225 15,120" className="trace-rhombus-electric" />
-          </svg>
-          <div className="intro-logo-content">
-            <h1 className="intro-acm-badge">acm</h1>
-            <span className="intro-subtext">VIT-AP</span>
-          </div>
+        {/* ACM chapter seal with a scanning energy frame */}
+        <div className="intro-diamond-frame" style={{ '--loader-progress': displayProgress }}>
+          <div className="intro-logo-status-ring" aria-hidden="true" />
+          <img
+            className="intro-logo-image"
+            src="/assets/acm-logo-transparent.png"
+            alt="ACM VIT-AP Chapter"
+          />
         </div>
 
         {/* Progress status & bar */}

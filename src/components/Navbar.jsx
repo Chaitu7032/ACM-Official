@@ -37,7 +37,7 @@ export default function Navbar({ activeSection = 'home', onNavigate }) {
         >
           <div className="nav-logo-diamond-wrap">
             <img
-              src="/assets/Acm logo.jpeg"
+              src="/assets/acm-logo-transparent.png"
               alt="ACM Logo"
               className="nav-logo-badge-img"
               width={34}

@@ -13,7 +13,7 @@ export default function CursorEffects() {
 
   useEffect(() => {
     // Disable custom cursor and magnetic physics on touch devices
-    if (window.matchMedia('(pointer: coarse)').matches) {
+    if (window.matchMedia('(pointer: coarse)').matches || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       return;
     }
 
