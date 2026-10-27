@@ -3010,7 +3010,7 @@ a:focus-visible {
 
 /* Event Management org chart */
 .event-management-diagram {
-  width: min(1060px, 100%);
+  width: min(1200px, 100%);
   margin: .75rem auto 0;
   position: relative;
 }
@@ -3027,26 +3027,26 @@ a:focus-visible {
 .event-diagram-branches span { position: absolute; top: -2px; height: 30px; width: 2px; background: #38bdf8; box-shadow: 0 0 10px #38bdf8; }
 .event-diagram-branches span:first-child { left: 0; }
 .event-diagram-branches span:last-child { right: 0; background: #34d399; box-shadow: 0 0 10px #34d399; }
-.event-diagram-branch-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-.event-team-branch { padding: 1.15rem; border-radius: 20px; background: rgba(5, 20, 48, .72); border: 1px solid rgba(14, 165, 233, .65); box-shadow: inset 0 1px 0 rgba(255,255,255,.07), 0 14px 35px rgba(0,0,0,.3); }
+.event-diagram-branch-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.75rem; }
+.event-team-branch { padding: 1.35rem; border-radius: 20px; background: rgba(5, 20, 48, .72); border: 1px solid rgba(14, 165, 233, .65); box-shadow: inset 0 1px 0 rgba(255,255,255,.07), 0 14px 35px rgba(0,0,0,.3); }
 .event-team-branch--volunteers { border-color: rgba(16, 185, 129, .68); background: rgba(4, 39, 42, .68); }
 .event-team-branch header { display: flex; align-items: flex-start; gap: .9rem; margin-bottom: 1rem; }
 .event-team-branch header > svg { flex: 0 0 auto; width: 42px; height: 42px; padding: 10px; border-radius: 50%; color: #38bdf8; border: 1px solid rgba(56,189,248,.7); background: rgba(2,132,199,.18); box-shadow: 0 0 18px rgba(14,165,233,.25); }
 .event-team-branch--volunteers header > svg { color: #34d399; border-color: rgba(52,211,153,.7); background: rgba(5,150,105,.18); }
 .event-team-branch h3 { color: #f8fafc; font: 700 1.05rem var(--font-display); margin: .15rem 0 .25rem; }
 .event-team-branch p { color: #a9bad4; font-size: .76rem; line-height: 1.4; margin: 0; max-width: 360px; }
-.event-team-node-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: .9rem; }
-.event-team-node { min-width: 0; display: flex; align-items: center; gap: .8rem; padding: .9rem .8rem; border: 1px solid rgba(56,114,180,.4); border-radius: 15px; background: rgba(12, 37, 74, .72); transition: transform .25s ease, border-color .25s ease, background .25s ease; }
+.event-team-node-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.event-team-node { min-width: 0; display: flex; align-items: center; gap: .95rem; padding: 1rem; border: 1px solid rgba(56,114,180,.4); border-radius: 15px; background: rgba(12, 37, 74, .72); transition: transform .25s ease, border-color .25s ease, background .25s ease; }
 .event-team-branch--volunteers .event-team-node { border-color: rgba(16,185,129,.4); background: rgba(8,67,64,.58); }
 .event-team-node:hover { transform: translateY(-3px); border-color: #38bdf8; background: rgba(15, 53, 96, .9); }
 .event-team-branch--volunteers .event-team-node:hover { border-color: #34d399; }
-.event-team-node-avatar { width: 84px; height: 84px; flex: 0 0 84px; border-radius: 50%; overflow: hidden; display: grid; place-items: center; color: #fff; font-weight: 700; background: #122b52; border: 1px solid rgba(56,189,248,.75); box-shadow: 0 0 13px rgba(14,165,233,.23); }
+.event-team-node-avatar { width: 88px; height: 88px; flex: 0 0 88px; border-radius: 50%; overflow: hidden; display: grid; place-items: center; color: #fff; font-weight: 700; background: #122b52; border: 1px solid rgba(56,189,248,.75); box-shadow: 0 0 13px rgba(14,165,233,.23); }
 .event-team-branch--volunteers .event-team-node-avatar { border-color: rgba(52,211,153,.75); box-shadow: 0 0 13px rgba(16,185,129,.2); }
 .event-team-node-avatar img { width: 100%; height: 100%; object-fit: cover; }
 .event-team-node-copy { min-width: 0; }
 .event-team-node-role { display: inline-block; padding: .2rem .6rem; border: 1px solid rgba(56,189,248,.65); border-radius: 999px; color: #67e8f9; font-size: .63rem; line-height: 1; margin-bottom: .45rem; }
 .event-team-branch--volunteers .event-team-node-role { color: #6ee7b7; border-color: rgba(52,211,153,.6); }
-.event-team-node h4 { color: #f8fafc; font: 700 .88rem var(--font-display); line-height: 1.2; margin: 0 0 .5rem; overflow-wrap: anywhere; }
+.event-team-node h4 { color: #f8fafc; font: 700 .94rem var(--font-display); line-height: 1.22; margin: 0 0 .55rem; overflow-wrap: anywhere; }
 .event-team-node-socials { display: flex; gap: .35rem; }
 .event-team-node-socials a { display: grid; place-items: center; width: 23px; height: 23px; border: 1px solid rgba(148,163,184,.4); border-radius: 50%; color: #dbeafe; }
 .event-team-node-socials a:hover { color: #fff; border-color: #38bdf8; }

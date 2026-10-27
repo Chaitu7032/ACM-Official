@@ -55,7 +55,7 @@ export const ADMIN_PRESIDENCY = [
   },
   {
     id: 'vice-president',
-    name: 'Dharineesh MR',
+    name: 'Dharineesh M R',
     role: 'Vice President',
     badge: 'EXECUTIVE LEADERSHIP',
     photo: '/team-photos/dharineesh_passport.jpg',
@@ -154,7 +154,7 @@ export const ADMIN_MANAGERS = [
   },
   {
     id: 'social-media-manager-core',
-    name: 'Yazhini',
+    name: 'Yazhini K B',
     role: 'Social Media Manager',
     badge: 'OPERATIONS LEAD',
     photo: '/team-photos/yazhini_passport.jpg',
@@ -167,7 +167,7 @@ export const ADMIN_MANAGERS = [
   },
   {
     id: 'community-manager-core',
-    name: 'Nihitha',
+    name: 'Mupparaju Nihitha Chowdary',
     role: 'Community Manager',
     badge: 'OPERATIONS LEAD',
     photo: '/team-photos/nihitha_passport.jpg',
@@ -256,7 +256,7 @@ export const DOMAIN_TEAMS = [
         members: [
           {
             id: 'event-volunteer-manager-dept',
-            name: 'R. Sai Ganesh',
+            name: 'Rayapudi Sai Ganesh',
             role: 'Volunteer Manager',
             photo: '/team-photos/sai_ganesh_passport.jpg',
             photoCrop: 'center center',
@@ -265,7 +265,7 @@ export const DOMAIN_TEAMS = [
           },
           {
             id: 'event-volunteer-member-akash',
-            name: 'Akash',
+            name: 'Vendra Akash Chandra',
             role: 'Co-Lead',
             photo: '/team-photos/vendra akash chandra.png',
             photoCrop: 'center 38%',
@@ -280,7 +280,7 @@ export const DOMAIN_TEAMS = [
         members: [
           {
             id: 'event-lead-dept',
-            name: 'Lakshmi Sree Raghava',
+            name: 'Tetala Lakshmi Sreeraghava',
             role: 'Lead',
             photo: '/team-photos/TETALA LAKSHMI SREERAGHAVA.jpeg',
             photoCrop: 'center 42%',
@@ -290,7 +290,7 @@ export const DOMAIN_TEAMS = [
           },
           {
             id: 'event-colead-dept',
-            name: 'Taneesh Valupadasu',
+            name: 'Valupadasu Taneesh Kumar',
             role: 'Co-Lead',
             photo: '/team-photos/taneesh.jpg',
             photoCrop: 'center 45%',
@@ -302,7 +302,7 @@ export const DOMAIN_TEAMS = [
     ],
     lead: {
       id: 'event-lead-dept',
-      name: 'Lakshmi Sree Raghava',
+      name: 'Tetala Lakshmi Sreeraghava',
       role: 'Lead',
       photo: '/team-photos/TETALA LAKSHMI SREERAGHAVA.jpeg',
       photoCrop: 'center 15%',
@@ -321,7 +321,7 @@ export const DOMAIN_TEAMS = [
       },
       {
         id: 'event-volunteer-manager-dept',
-        name: 'R. Sai Ganesh',
+        name: 'Rayapudi Sai Ganesh',
         role: 'Volunteer Manager',
         photo: '/team-photos/sai_ganesh_passport.jpg',
         photoCrop: 'center center',
@@ -330,7 +330,7 @@ export const DOMAIN_TEAMS = [
       },
       {
         id: 'event-volunteer-member-akash',
-        name: 'Akash',
+        name: 'Vendra Akash Chandra',
         role: 'Co-Lead',
         photo: '/team-photos/vendra akash chandra.png',
         photoCrop: 'center 38%',
@@ -339,7 +339,7 @@ export const DOMAIN_TEAMS = [
       },
       {
         id: 'event-lead-dept',
-        name: 'Lakshmi Sree Raghava',
+        name: 'Tetala Lakshmi Sreeraghava',
         role: 'Lead',
         photo: '/team-photos/TETALA LAKSHMI SREERAGHAVA.jpeg',
         photoCrop: 'center 42%',
@@ -349,7 +349,7 @@ export const DOMAIN_TEAMS = [
       },
       {
         id: 'event-colead-dept',
-        name: 'Taneesh Valupadasu',
+        name: 'Valupadasu Taneesh Kumar',
         role: 'Co-Lead',
         photo: '/team-photos/taneesh.jpg',
         photoCrop: 'center 45%',
@@ -366,7 +366,7 @@ export const DOMAIN_TEAMS = [
     desc: 'Amplifying chapter achievements, spotlighting members, and driving digital reach across global platforms.',
     lead: {
       id: 'social-lead',
-      name: 'Vishwath',
+      name: 'Donepudi Vishwath',
       role: 'Team Lead',
       photo: '/team-photos/viswath.png',
       photoCrop: 'center center',
@@ -399,7 +399,7 @@ export const DOMAIN_TEAMS = [
     desc: 'Crafting visually arresting graphic identities, 3D brand assets, user interfaces, and media motion designs.',
     lead: {
       id: 'creative-lead',
-      name: 'Akshitha Baby',
+      name: 'Dokka Akshitha Baby',
       role: 'Team Lead',
       photo: '/team-photos/akshitha.jpg',
       quote: 'Designing the visual language of futuristic computing and interactive art.',
@@ -435,7 +435,7 @@ export const DOMAIN_TEAMS = [
       },
       {
         id: 'marketing-lead-2',
-        name: 'G Hansika Reddy',
+        name: 'Hansika Reddy Gillala',
         role: 'Manager',
         photo: '/team-photos/hansika.jpg',
         quote: 'Driving campaign promotions, brand visibility, and sponsor relations.',
@@ -451,7 +451,7 @@ export const DOMAIN_TEAMS = [
     desc: 'Exploring deep computing paradigms, machine intelligence, papers, and production-grade prototypes.',
     lead: {
       id: 'research-lead',
-      name: 'Tanuj R',
+      name: 'Tanuj',
       role: 'Team Lead',
       photo: '/team-photos/tanuj.jpg',
       quote: 'Investigating next-generation algorithms and guiding open project explorations.',
