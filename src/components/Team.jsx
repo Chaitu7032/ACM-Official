@@ -277,9 +277,8 @@ function EventTeamNode({ member }) {
 
 function EventManagementDiagram({ department }) {
   const manager = department.hierarchyTiers[0].members[0];
-  const volunteerLead = department.hierarchyTiers[1].members[0];
   const eventMembers = department.hierarchyTiers[2].members;
-  const volunteerMember = department.hierarchyTiers[1].members[1];
+  const volunteerMembers = department.hierarchyTiers[1].members;
 
   return (
     <div className="event-management-diagram" aria-label="Event management team structure">
@@ -295,7 +294,7 @@ function EventManagementDiagram({ department }) {
         </section>
         <section className="event-team-branch event-team-branch--volunteers">
           <header><Users size={20} /><div><h3>Volunteer Management</h3><p>Coordinating volunteers, community outreach, and on-ground event support.</p></div></header>
-          <div className="event-team-node-grid">{[volunteerLead, volunteerMember].map((member) => <EventTeamNode key={member.id} member={member} />)}</div>
+          <div className="event-team-node-grid">{volunteerMembers.map((member) => <EventTeamNode key={member.id} member={member} />)}</div>
         </section>
       </div>
     </div>

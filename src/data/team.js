@@ -85,12 +85,12 @@ export const ADMIN_CORE_OFFICERS = [
   },
   {
     id: 'joint-secretary',
-    name: 'Gowtami Kortam',
+    name: 'Gundlapalli Mohana Ramya',
     role: 'Joint Secretary',
     badge: 'CORE OFFICER',
-    photo: '/team-photos/gowthami_passport.jpg',
+    photo: '/team-photos/GUNDLAPALLI MOHANA RAMYA .jpeg',
     photoCrop: 'center center',
-    quote: 'Streamlining cross-domain communication and student chapter initiatives.',
+    quote: 'Coordinating chapter administration, communication, and student leadership initiatives.',
     socials: {
       github: 'https://github.com',
       linkedin: 'https://linkedin.com',
@@ -113,19 +113,6 @@ export const ADMIN_CORE_OFFICERS = [
 
 // Tier 3: Operations & Management
 export const ADMIN_MANAGERS = [
-  {
-    id: 'club-manager',
-    name: 'Angel Pratibha Mukherjee',
-    role: 'Club Manager',
-    badge: 'OPERATIONS LEAD',
-    photo: '/team-photos/angel_passport.jpg',
-    photoCrop: 'center center',
-    quote: 'Driving operations, member welfare, and high-energy chapter execution.',
-    socials: {
-      github: 'https://github.com',
-      linkedin: 'https://linkedin.com',
-    },
-  },
   {
     id: 'technical-manager',
     name: 'Dhyanesh',
@@ -160,19 +147,6 @@ export const ADMIN_MANAGERS = [
     photo: '/team-photos/yazhini_passport.jpg',
     photoCrop: 'center center',
     quote: 'Amplifying the chapter narrative, digital campaigns, and community reach.',
-    socials: {
-      github: 'https://github.com',
-      linkedin: 'https://linkedin.com',
-    },
-  },
-  {
-    id: 'community-manager-core',
-    name: 'Mupparaju Nihitha Chowdary',
-    role: 'Community Manager',
-    badge: 'OPERATIONS LEAD',
-    photo: '/team-photos/nihitha_passport.jpg',
-    photoCrop: 'center center',
-    quote: 'Fostering inclusive student relations, networking channels, and vibrant chapter engagement.',
     socials: {
       github: 'https://github.com',
       linkedin: 'https://linkedin.com',
@@ -241,10 +215,10 @@ export const DOMAIN_TEAMS = [
         members: [
           {
             id: 'event-manager-dept',
-            name: 'Mohana Ramya',
+            name: 'Valupadasu Taneesh Kumar',
             role: 'Events Manager',
-            photo: '/team-photos/GUNDLAPALLI MOHANA RAMYA .jpeg',
-            photoCrop: 'center 42%',
+            photo: '/team-photos/taneesh.jpg',
+            photoCrop: 'center 45%',
             quote: 'Supervising flagship event execution, volunteer coordination, venue logistics, and attendee operations.',
             socials: { github: 'https://github.com', linkedin: 'https://linkedin.com' },
           },
@@ -261,15 +235,6 @@ export const DOMAIN_TEAMS = [
             photo: '/team-photos/sai_ganesh_passport.jpg',
             photoCrop: 'center center',
             quote: 'Mobilizing student volunteer contingents and ensuring smooth operational readiness across events.',
-            socials: { github: 'https://github.com', linkedin: 'https://linkedin.com' },
-          },
-          {
-            id: 'event-volunteer-member-akash',
-            name: 'Vendra Akash Chandra',
-            role: 'Co-Lead',
-            photo: '/team-photos/vendra akash chandra.png',
-            photoCrop: 'center 38%',
-            quote: 'Supporting volunteer coordination and on-ground event execution.',
             socials: { github: 'https://github.com', linkedin: 'https://linkedin.com' },
           },
         ],
@@ -290,10 +255,10 @@ export const DOMAIN_TEAMS = [
           },
           {
             id: 'event-colead-dept',
-            name: 'Valupadasu Taneesh Kumar',
+            name: 'Vendra Akash Chandra',
             role: 'Co-Lead',
-            photo: '/team-photos/taneesh.jpg',
-            photoCrop: 'center 45%',
+            photo: '/team-photos/vendra akash chandra.png',
+            photoCrop: 'center 38%',
             quote: 'Coordinating stage schedules, volunteer task tracks, technical logistics, and crowd flow.',
             socials: { github: 'https://github.com', linkedin: 'https://linkedin.com' },
           },
@@ -312,10 +277,10 @@ export const DOMAIN_TEAMS = [
     members: [
       {
         id: 'event-manager-dept',
-        name: 'Mohana Ramya',
+        name: 'Valupadasu Taneesh Kumar',
         role: 'Events Manager',
-        photo: '/team-photos/GUNDLAPALLI MOHANA RAMYA .jpeg',
-        photoCrop: 'center 42%',
+        photo: '/team-photos/taneesh.jpg',
+        photoCrop: 'center 45%',
         quote: 'Supervising flagship event execution, volunteer coordination, venue logistics, and attendee operations.',
         socials: { github: 'https://github.com', linkedin: 'https://linkedin.com' },
       },
@@ -326,15 +291,6 @@ export const DOMAIN_TEAMS = [
         photo: '/team-photos/sai_ganesh_passport.jpg',
         photoCrop: 'center center',
         quote: 'Mobilizing student volunteer contingents and ensuring smooth operational readiness across events.',
-        socials: { github: 'https://github.com', linkedin: 'https://linkedin.com' },
-      },
-      {
-        id: 'event-volunteer-member-akash',
-        name: 'Vendra Akash Chandra',
-        role: 'Co-Lead',
-        photo: '/team-photos/vendra akash chandra.png',
-        photoCrop: 'center 38%',
-        quote: 'Supporting volunteer coordination and on-ground event execution.',
         socials: { github: 'https://github.com', linkedin: 'https://linkedin.com' },
       },
       {
@@ -349,10 +305,10 @@ export const DOMAIN_TEAMS = [
       },
       {
         id: 'event-colead-dept',
-        name: 'Valupadasu Taneesh Kumar',
+        name: 'Vendra Akash Chandra',
         role: 'Co-Lead',
-        photo: '/team-photos/taneesh.jpg',
-        photoCrop: 'center 45%',
+        photo: '/team-photos/vendra akash chandra.png',
+        photoCrop: 'center 38%',
         quote: 'Coordinating stage schedules, volunteer task tracks, technical logistics, and crowd flow.',
         socials: { github: 'https://github.com', linkedin: 'https://linkedin.com' },
       },
@@ -437,7 +393,8 @@ export const DOMAIN_TEAMS = [
         id: 'marketing-lead-2',
         name: 'Hansika Reddy Gillala',
         role: 'Manager',
-        photo: '/team-photos/hansika.jpg',
+        photo: '/team-photos/hansika gillela.jpeg',
+        photoCrop: 'center center',
         quote: 'Driving campaign promotions, brand visibility, and sponsor relations.',
         socials: { github: 'https://github.com', linkedin: 'https://linkedin.com' },
       },
