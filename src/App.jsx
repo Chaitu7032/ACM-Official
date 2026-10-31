@@ -3,7 +3,7 @@
 // ---------------------------------------------------------------------------
 import React, { useState, useEffect, useRef, Suspense, lazy } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { ArrowRight, ChevronRight, Globe as GlobeIcon } from 'lucide-react';
+import { ArrowRight, ChevronRight, Globe as GlobeIcon, X } from 'lucide-react';
 import Loader from './components/Loader.jsx';
 import Navbar from './components/Navbar.jsx';
 import Hero from './components/Hero.jsx';
@@ -182,8 +182,12 @@ function GallerySection() {
 // Event-first gallery: select an event to open its complete photo collection.
 function EventGallery() {
   const [selected, setSelected] = useState(null);
+  const [lightbox, setLightbox] = useState(null);
+  const touchStart = useRef(null);
   const events = [
-    { label: 'ACM QUEST', category: 'COMPETITIONS', image: '/eventspictures/acmquest.webp', photos: ['/eventspictures/acmquest.webp'] },
+    { label: 'ACM QUEST', category: 'COMPETITIONS', image: '/eventspictures/acmquest.webp', video: '/eventspictures/Acm Quest/2026-10-31 22-27-43.mp4', photos: [
+      '/eventspictures/Acm Quest/1.webp', '/eventspictures/Acm Quest/2.webp',
+    ] },
     { label: 'TREASURE HUNT', category: 'COMMUNITY', image: '/eventspictures/treasurehunt.webp', photos: [
       '/eventspictures/Treasure Hunt/IMG_2679.webp', '/eventspictures/Treasure Hunt/IMG_2698.webp',
       '/eventspictures/Treasure Hunt/IMG_2703.webp', '/eventspictures/Treasure Hunt/IMG_2729.webp',
@@ -196,20 +200,65 @@ function EventGallery() {
       '/eventspictures/KBC/IMG_8901.webp', '/eventspictures/KBC/IMG_20260911_165219878.webp',
       '/eventspictures/KBC/IMG_5563.webp', '/eventspictures/KBC/IMG_5587.webp', '/eventspictures/KBC.webp',
     ] },
-    { label: 'ASHUTOSH WEBINAR', category: 'INNOVATION', image: '/eventspictures/ashutosh.webp', photos: ['/eventspictures/ashutosh.webp'] },
+    { label: 'ASHUTOSH WEBINAR', category: 'INNOVATION', image: '/eventspictures/ashutosh.webp', photos: [
+      '/eventspictures/ashutosh webinar/IMG_3764.webp', '/eventspictures/ashutosh webinar/IMG_3766.webp',
+      '/eventspictures/ashutosh webinar/IMG_3774.webp', '/eventspictures/ashutosh webinar/IMG_3776.webp',
+      '/eventspictures/ashutosh webinar/IMG_3780.webp', '/eventspictures/ashutosh webinar/IMG_3781.webp',
+      '/eventspictures/ashutosh webinar/IMG_3783.webp', '/eventspictures/ashutosh webinar/IMG_3786.webp',
+      '/eventspictures/ashutosh webinar/IMG_3788.webp', '/eventspictures/ashutosh webinar/IMG_3790.webp',
+      '/eventspictures/ashutosh webinar/IMG_8058.webp', '/eventspictures/ashutosh webinar/IMG_8061.webp',
+      '/eventspictures/ashutosh.webp',
+    ] },
     { label: 'PROMPT BATTLE', category: 'INNOVATION', image: '/eventspictures/promptbattle/20261010_170436.webp', photos: [
       '/eventspictures/promptbattle/20261010_170436.webp', '/eventspictures/promptbattle/20261010_170618.webp',
       '/eventspictures/promptbattle/IMG_5612.webp', '/eventspictures/promptbattle/IMG_5669.webp', '/eventspictures/promptbattle/IMG_5677.webp',
     ] },
-    { label: 'TECHNICAL WORKSHOP', category: 'WORKSHOPS', image: '/eventspictures/technical workshop.webp', photos: ['/eventspictures/technical workshop.webp'] },
-    { label: 'FRESHERS MEET AND GREET', category: 'COMMUNITY', image: '/eventspictures/meetandgreet.webp', photos: ['/eventspictures/meetandgreet.webp'] },
+    { label: 'TECHNICAL WORKSHOP', category: 'WORKSHOPS', image: '/eventspictures/technical workshop.webp', photos: [
+      '/eventspictures/technical workshop/20261015_121925.webp',
+      '/eventspictures/technical workshop/20261015_125624.webp',
+      '/eventspictures/technical workshop/20261015_125638.webp',
+      '/eventspictures/technical workshop/20261015_125717.webp',
+      '/eventspictures/technical workshop/20261015_125735.webp',
+      '/eventspictures/technical workshop/selected (2).webp',
+      '/eventspictures/technical workshop/selected.webp',
+      '/eventspictures/technical workshop.webp',
+    ] },
+    { label: 'FRESHERS MEET AND GREET', category: 'COMMUNITY', image: '/eventspictures/meetandgreet.webp', photos: [
+      '/eventspictures/MEET AND GREET/WhatsApp Image 2026-10-28 at 15.43.02.webp',
+      '/eventspictures/MEET AND GREET/WhatsApp Image 2026-10-28 at 15.43.03.webp',
+      '/eventspictures/MEET AND GREET/WhatsApp Image 2026-10-28 at 15.43.04 (1).webp',
+      '/eventspictures/MEET AND GREET/WhatsApp Image 2026-10-28 at 15.43.04.webp',
+      '/eventspictures/MEET AND GREET/WhatsApp Image 2026-10-28 at 15.43.05.webp',
+      '/eventspictures/MEET AND GREET/WhatsApp Image 2026-10-28 at 15.43.08.webp',
+      '/eventspictures/MEET AND GREET/WhatsApp Image 2026-10-28 at 15.43.09.webp',
+      '/eventspictures/MEET AND GREET/WhatsApp Image 2026-10-28 at 15.43.11.webp',
+      '/eventspictures/MEET AND GREET/WhatsApp Image 2026-10-28 at 15.43.12.webp',
+      '/eventspictures/MEET AND GREET/WhatsApp Image 2026-10-28 at 15.43.13 (1).webp',
+      '/eventspictures/MEET AND GREET/WhatsApp Image 2026-10-28 at 15.43.13.webp',
+      '/eventspictures/meetandgreet.webp',
+    ] },
   ];
+
+  useEffect(() => {
+    if (!lightbox) return undefined;
+    const onKeyDown = (event) => {
+      if (event.key === 'Escape') setLightbox(null);
+      if (event.key === 'ArrowLeft') setLightbox((current) => current && { ...current, index: (current.index - 1 + current.photos.length) % current.photos.length });
+      if (event.key === 'ArrowRight') setLightbox((current) => current && { ...current, index: (current.index + 1) % current.photos.length });
+    };
+    document.body.style.overflow = 'hidden';
+    document.addEventListener('keydown', onKeyDown);
+    return () => { document.body.style.overflow = ''; document.removeEventListener('keydown', onKeyDown); };
+  }, [lightbox]);
+
+  const moveLightbox = (direction) => setLightbox((current) => current && ({ ...current, index: (current.index + direction + current.photos.length) % current.photos.length }));
 
   return <section className="section-full gallery-showcase event-gallery" id="gallery">
     {!selected ? <>
       <div className="event-gallery-heading"><div className="section-eyebrow-badge"><span>EVENT ARCHIVE</span></div><h2 className="section-headline-large">MOMENTS THAT <span className="blue-highlight">INSPIRE.</span></h2><p className="section-subtext-lede">Choose an event to explore its photos and relive the experience.</p></div>
       <div className="event-list-grid">{events.map((event, index) => <button className="event-list-card" style={{ '--event-index': index }} key={event.label} onClick={() => setSelected(event)}><img src={event.image} alt="" loading="lazy" decoding="async" /><span className="event-list-card-copy"><small>{event.category}</small><strong>{event.label}</strong><span>View photos <ArrowRight size={15} /></span></span></button>)}</div>
-    </> : <div className="event-detail"><button className="event-detail-back" onClick={() => setSelected(null)}>← All events</button><div className="event-detail-heading"><div><span className="gallery-memory-category">{selected.category}</span><h2>{selected.label}</h2></div><p>Event memories from ACM VIT-AP</p></div><div className="event-photo-grid">{selected.photos.map((photo, index) => <img style={{ '--photo-index': index }} key={photo} src={photo} alt={`${selected.label} event memory`} loading="lazy" decoding="async" />)}</div></div>}
+    </> : <div className="event-detail"><button className="event-detail-back" onClick={() => setSelected(null)}>← All events</button><div className="event-detail-heading"><div><span className="gallery-memory-category">{selected.category}</span><h2>{selected.label}</h2></div><p>Event memories from ACM VIT-AP · Click any photo to expand</p></div>{selected.video && <div className="event-feature-video"><video src={selected.video} autoPlay loop muted playsInline preload="metadata" controls aria-label={`${selected.label} event video`} /></div>}<div className="event-photo-grid">{selected.photos.map((photo, index) => <button className="event-photo-button" style={{ '--photo-index': index }} key={photo} type="button" onClick={() => setLightbox({ photos: selected.photos, index, label: selected.label })} aria-label={`Open ${selected.label} photo ${index + 1}`}><img src={photo} alt={`${selected.label} event memory`} loading="lazy" decoding="async" /></button>)}</div></div>}
+    {lightbox && <div className="gallery-lightbox" role="dialog" aria-modal="true" aria-label={`${lightbox.label} photo viewer`} onClick={() => setLightbox(null)} onTouchStart={(event) => { touchStart.current = event.touches[0].clientX; }} onTouchEnd={(event) => { const delta = event.changedTouches[0].clientX - touchStart.current; if (Math.abs(delta) > 45) moveLightbox(delta > 0 ? -1 : 1); }}><button className="gallery-lightbox-close" type="button" onClick={() => setLightbox(null)} aria-label="Close photo viewer"><X size={24} /></button><button className="gallery-lightbox-nav gallery-lightbox-prev" type="button" onClick={(event) => { event.stopPropagation(); moveLightbox(-1); }} aria-label="Previous photo">‹</button><div className="gallery-lightbox-stage" onClick={(event) => event.stopPropagation()}><img src={lightbox.photos[lightbox.index]} alt={`${lightbox.label} photo ${lightbox.index + 1}`} decoding="async" fetchPriority="high" /><div className="gallery-lightbox-meta"><span>{lightbox.label}</span><strong>{lightbox.index + 1} / {lightbox.photos.length}</strong></div></div><button className="gallery-lightbox-nav gallery-lightbox-next" type="button" onClick={(event) => { event.stopPropagation(); moveLightbox(1); }} aria-label="Next photo">›</button></div>}
   </section>;
 }
 

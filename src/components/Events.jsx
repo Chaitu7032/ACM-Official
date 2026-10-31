@@ -29,13 +29,22 @@ const tiles = [
 function EventTile({ event, featured = false }) {
   return (
     <article className={`reference-event-tile event-${event.id} ${featured ? 'reference-event-tile--featured' : ''}`}>
-      <img
+      {event.video ? <video
+        src={event.video}
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="metadata"
+        poster={event.image}
+        aria-label={`${event.title} event video`}
+      /> : <img
         src={event.image}
         alt={event.title}
         loading="lazy"
         decoding="async"
         style={{ objectPosition: event.position }}
-      />
+      />}
       <div className="reference-event-shade" />
       <div className="reference-event-copy">
         <h3>{event.title}</h3>
@@ -56,6 +65,7 @@ export default function Events() {
     subtitle: 'A thrilling challenge of knowledge, logic and teamwork inspired by the world of Spider-Man.',
     tag: '★  FEATURED EVENT',
     image: '/eventspictures/acmquest.webp',
+    video: '/eventspictures/Acm Quest/2026-10-31 22-27-43.mp4',
     position: 'center',
   };
 
